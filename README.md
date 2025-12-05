@@ -1,1 +1,1 @@
-# QTM-350-Final-Project
+# QTM 350 Final Project
