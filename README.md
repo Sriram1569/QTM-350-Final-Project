@@ -1,4 +1,5 @@
 # QTM 350 Final Project
+Group Members: Sriram Subramoniapillai, Maanya Ladhani, Bert Li, Justin He
 
 ## Research Question
 How have GDP per capita and employment rates co-moved in the USA and China (1990-2023)?
