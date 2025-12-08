@@ -1,0 +1,380 @@
+---
+title: "QTM 350 Final Project"
+subtitle: "GDP per Capita & Employment Co-Movement in the USA and China (1990–2023)"
+author:
+  - "Bert Li (Emory ID: 2549011)"
+  - "Maanya Ladhani (Emory ID: 2549003)"
+  - "Sriram Subramoniapillai (Emory ID: 2591970)"
+  - "Justin He (Emory ID: 2549590)"
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    number-sections: true
+    smooth-scroll: true
+    code-fold: true
+    page-numbering: true
+    code-tools: true
+    code-summary: "Show code"
+
+  pdf:
+    toc: true
+    number-sections: true
+    geometry: "margin=1in"
+    fontsize: 11pt
+    linestretch: 1.1
+
+jupyter: python3
+
+execute:
+  echo: true
+  warning: false
+  message: false
+  python: ".venv/bin/python"
+---
+
+# Introduction
+
+::: callout-note
+## Research Question
+
+How have **GDP per capita** and **employment rates** co-moved in the  
+**United States** and **China** between **1990 and 2023**?
+:::
+
+The United States and China are the two largest economies in the world, but they have followed very different development paths. The United States is a mature, high-income economy, while China has undergone rapid structural transformation from a low-income to an upper-middle-income country over the past three decades.
+
+By comparing long-run trends in GDP per capita, employment rates, and GDP growth, we aim to understand:
+
+- how each country’s economy evolved over time,  
+- whether labor-market activity and economic growth move together, and  
+- how major shocks (such as the 2008 financial crisis and the COVID-19 pandemic) show up in aggregate indicators.
+
+This report summarizes our dataset, describes the cleaning process, presents visualizations produced by our group, and discusses the main patterns we observe.
+
+---
+
+# Background
+
+GDP per capita is a standard measure of average economic well-being, while the employment-to-population ratio captures how intensively a country’s working-age population is engaged in the labor market. In many advanced economies, these variables tend to move together: strong growth often coincides with high employment, and recessions reduce both income and employment.
+
+China’s growth experience, however, has been driven heavily by investment, exports, and productivity gains. That raises a natural question:  
+
+> **Did China’s extraordinary GDP per capita growth translate into higher employment participation, or did it follow a different pattern than the United States?**
+
+Our analysis focuses on describing these relationships rather than making causal claims.
+
+---
+
+# Data Description
+
+We use data from the **World Development Indicators (WDI)**, a public database maintained by the **World Bank**. Our final dataset combines three annual indicators for **China (CHN)** and the **United States (USA)**:
+
+- **Employment-to-population ratio (%), ages 15+**  
+- **GDP per capita (constant 2015 US$)**  
+- **GDP growth (annual %)**  
+
+## Data Cleaning
+
+Raw data files were initially stored under:
+data/raw/
+
+After downloading, the files were cleaned and standardized. The following steps were applied:
+
+1. **Rename columns**  
+   - `Country Name` → `country_name`  
+   - `Country Code` → `iso3`  
+   - `Year` → `year`  
+   - `Value` → indicator-specific variable name  
+
+2. **Convert data types**  
+   - `year` converted to integer  
+   - numeric fields coerced to proper numeric format  
+
+3. **Filter for analysis scope**  
+   - Countries included: **CHN**, **USA**  
+   - Years included: **1990–2023**
+
+4. **Merge datasets**  
+   All three indicators were merged on `iso3` and `year` to create the final analytical dataset:
+   `country_name | iso3 | year | gdp_per_capita | employment_rate | gdp_growth`
+
+5. **Handle missing values**  
+A missingness audit was generated for all variables and saved to:
+  `figures/missingness.csv`
+
+6. **Generate summary outputs**  
+The following descriptive files were created for reporting:
+  `figures/clean_head.csv
+  figures/descriptive_stats_all.csv
+  figures/descriptive_by_country.csv
+  figures/missingness.csv`
+
+
+## Descriptive Statistics
+
+The script above produces summary files in the `figures/` folder. Using those outputs, we report the key descriptive statistics for the full sample and by country.
+
+### Overall Summary Statistics (China + USA, 1990–2023)
+```{python}
+import pandas as pd
+
+# Load merged dataset
+df = pd.read_csv("data/processed/merged_data.csv")
+
+# Rename columns so they match expected names
+df = df.rename(columns={
+    "Country Code": "iso3",
+    "Country Name": "country_name",
+    "Year": "year"
+})
+
+# Select numeric columns for overall descriptive stats
+cols = ["year", "gdp_per_capita", "employment_rate", "gdp_growth"]
+
+# 1️OVERALL SUMMARY STATISTICS (China + USA)
+desc_all = df[cols].describe()
+desc_all
+```
+
+The combined dataset for China and the United States from 1990 to 2023 shows substantial variation in economic performance across the four key variables. GDP per capita exhibits a wide distribution, ranging from about $917 to $65,505, reflecting the large income gap between the two economies and their rapid growth over time. Employment rates span from 56.6% to 76.8%, with a mean of roughly 64.8%, indicating relatively stable labor-market participation across years. GDP growth is more volatile, varying from a low of –2.58% to a high of 14.30%, with an average growth rate of 5.66%, capturing both recession periods and rapid expansion phases. The median year value of 2006.5 confirms the balanced coverage of the time series. Overall, the descriptive statistics highlight large cross-country differences and meaningful year-to-year fluctuations that motivate the need for deeper comparative analysis.
+
+### Descriptive Stats by Country
+#### China 
+
+```{python}
+import pandas as pd
+
+# Load data
+df = pd.read_csv("data/processed/merged_data.csv")
+
+# Filter for China only
+china_df = df[df["Country Code"] == "CHN"]
+
+# Select numeric columns and compute descriptive stats
+china_stats = china_df[["gdp_per_capita", "employment_rate", "gdp_growth"]].describe()
+
+china_stats
+```
+China’s descriptive statistics highlight a wide range in economic performance from 1990 to 2023. GDP per capita shows substantial variation—from just under $1,000 to over $12,000—reflecting China’s rapid economic expansion during this period. The mean employment rate is roughly 69%, with values ranging from 62.5% to 76.8%, indicating steady but gradually improving labor-market conditions. GDP growth is the most volatile indicator, with rates spanning from 2.34% to 14.30%, and an average of 8.84%, capturing China’s historically high growth during industrialization and periods of global economic slowdown. Overall, the statistics reveal China’s significant economic development, rising incomes, and relatively stable employment patterns, alongside consistently strong—but fluctuating—economic growth.
+
+#### USA
+
+```{python}
+# Filter for USA only
+usa_df = df[df["Country Code"] == "USA"]
+
+# Compute descriptive stats
+usa_stats = usa_df[["gdp_per_capita", "employment_rate", "gdp_growth"]].describe()
+
+usa_stats
+```
+The United States displays consistently high income levels over the 1990–2023 period, with GDP per capita ranging from about $38,600 to $65,500 and an average of $51,454, reflecting a stable, mature high-income economy. Employment rates show relatively low volatility, fluctuating between 56.6% and 63.5%, with a mean of 60.5%, indicating steady labor-market participation despite business cycle fluctuations such as the 2008 financial crisis and the COVID-19 recession. GDP growth varies more modestly than China’s, from –2.58% to 6.06%, averaging 2.49%, consistent with long-run U.S. economic trends of slower but stable growth. Overall, the U.S. statistics highlight a high-income economy with stable employment patterns and moderate economic growth volatility.
+
+# Data Analysis
+```{python}
+#| label: setup-analysis
+#| echo: false
+#| message: false
+#| warning: false
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# load merged data (path is from report/ folder)
+df = pd.read_csv("data/processed/merged_data.csv")
+
+# clean / standardize
+df = df.rename(columns={"Country Code": "iso3", "Year": "year"})
+df["year"] = df["year"].astype(int)
+
+sns.set(style="whitegrid")
+```
+
+## GDP per capita over time 
+
+```{python}
+#| label: fig-gdp-percap
+#| fig-cap: "GDP per capita (constant 2015 US$) for China (CHN) and the United States (USA), 1990–2023."
+#| fig-width: 8
+#| fig-height: 4
+#| warning: false
+#| message: false
+
+plt.figure(figsize=(8,4))
+for c in df["iso3"].unique():
+    s = df[df["iso3"] == c]
+    plt.plot(s["year"], s["gdp_per_capita"], marker="o", label=c)
+
+plt.title("GDP per capita (constant 2015 US$)")
+plt.xlabel("Year")
+plt.ylabel("GDP per capita")
+plt.legend(title="Country")
+plt.grid(alpha=0.2)
+plt.tight_layout()
+```
+
+This chart compares the long-run evolution of GDP per capita in China (CHN) and the United States (USA) from 1990 to 2023. The United States starts the period at a much higher income level—around $39,000—consistent with its status as a mature, high-income economy. Growth is steady but moderate, rising to roughly $65,000 by 2023.
+
+China, by contrast, begins at extremely low income levels (under $1,000) but shows rapid, sustained growth, especially after the early 2000s. By 2023, China surpasses $10,000 per capita. Although still far below the U.S., the rate of improvement is dramatic, reflecting China’s large-scale industrialization and economic reforms.
+
+Overall, the figure illustrates a persistent income gap between the two countries, but also highlights China’s exceptional catch-up growth trajectory, which is far faster than the U.S. in relative terms.
+
+## Employment-to-Population Ratio Over Time
+
+```{python}
+#| label: fig-employment-rate
+#| fig-cap: "Employment-to-population ratio (ages 15+, %) for China and the United States, 1990–2023."
+#| fig-width: 8
+#| fig-height: 4
+#| warning: false
+#| message: false
+
+plt.figure(figsize=(8,4))
+for c in df["iso3"].unique():
+    s = df[df["iso3"] == c]
+    plt.plot(s["year"], s["employment_rate"], marker="o", label=c)
+
+plt.title("Employment-to-population ratio (15+, %)")
+plt.xlabel("Year")
+plt.ylabel("Employment rate (%)")
+plt.legend(title="Country")
+plt.grid(alpha=0.2)
+plt.tight_layout()
+```
+The employment-to-population ratio has followed very different trajectories in China and the United States from 1990 to 2023. China begins the period with an exceptionally high employment rate—around 77%—but experiences a steady long-term decline, falling to roughly 63% by 2023 as the country undergoes demographic aging, structural economic shifts, and expanded education enrollment. In contrast, the United States starts much lower, near 61%, and shows moderate cyclical movement rather than a clear long-term trend. U.S. employment rises through the late 1990s, dips sharply during the 2008 financial crisis, recovers gradually, and then experiences another dramatic drop during the COVID-19 pandemic before partially rebounding. Overall, China maintains higher employment participation throughout the entire period, while the U.S. exhibits greater sensitivity to economic shocks and business-cycle fluctuations.
+
+
+## GDP Growth Over Time
+
+```{python}
+#| label: fig-gdp-growth-timeseries
+#| fig-cap: "Annual real GDP growth (%) in China and the United States, 1990–2023."
+#| fig-width: 8
+#| fig-height: 4
+#| warning: false
+#| message: false
+
+plt.figure(figsize=(8,4))
+for c in df["iso3"].unique():
+    s = df[df["iso3"] == c]
+    plt.plot(s["year"], s["gdp_growth"], marker="o", label=c)
+
+plt.title("GDP growth (annual %)")
+plt.xlabel("Year")
+plt.ylabel("GDP growth (%)")
+plt.axhline(0, linewidth=0.6)
+plt.legend(title="Country")
+plt.grid(alpha=0.2)
+plt.tight_layout()
+```
+The GDP growth trajectories of China and the United States from 1990 to 2023 reveal sharp contrasts in both level and volatility. China begins the period with exceptionally rapid expansion—often exceeding 10% throughout the 1990s and mid-2000s—reflecting its industrialization, export-led boom, and structural reforms. Growth gradually tapers as China transitions toward a more mature, consumption-driven economy, but it remains consistently higher than that of the United States, even during periods of global downturn. The United States, by comparison, exhibits much lower and more stable growth, generally fluctuating between 1% and 4%, with two major negative shocks: the 2009 recession during the global financial crisis and the steep contraction in 2020 due to the COVID-19 pandemic. Despite these shocks, U.S. growth rebounds quickly afterward. Overall, the figure highlights China’s long-run deceleration from extremely high growth rates and the United States’ cyclical but comparatively modest economic fluctuations.
+
+## GDP per Capita vs Employment Rate
+
+```{python}
+#| label: fig-gdp-vs-employment
+#| fig-cap: "Scatterplot of GDP per capita vs. employment rate (1990–2023) for China and the United States."
+#| fig-width: 6
+#| fig-height: 5
+#| warning: false
+#| message: false
+
+plt.figure(figsize=(6,5))
+for c in df["iso3"].unique():
+    s = df[df["iso3"] == c]
+    plt.scatter(
+        s["employment_rate"],
+        s["gdp_per_capita"],
+        label=c,
+        alpha=0.8,
+        s=40,
+    )
+
+plt.xlabel("Employment rate (%)")
+plt.ylabel("GDP per capita")
+plt.title("GDP per capita vs Employment rate")
+plt.legend(title="Country")
+plt.tight_layout()
+```
+The scatterplot of GDP per capita versus employment rate highlights the fundamentally different economic structures of China and the United States. For China, lower employment rates (around 62–77%) correspond to significantly lower GDP per capita levels, forming a downward-sloping pattern: as China’s employment rate gradually declined over time, GDP per capita steadily increased from low levels. In contrast, the U.S. points cluster at much higher GDP per capita values ($40,000–$65,000) despite having lower and narrower employment rates (roughly 57–63%). The lack of overlap between the two countries shows that employment rate alone does not explain income differences; instead, structural productivity differences dominate. Overall, the figure illustrates that China’s rapid income growth occurred even as employment participation fell, while the U.S. maintains high GDP per capita despite relatively modest employment rates.
+
+## Distribution of GDP Growth by Country
+
+```{python}
+#| label: fig-gdp-growth-box
+#| fig-cap: "Boxplot of annual GDP growth rates by country, 1990–2023."
+#| fig-width: 6
+#| fig-height: 5
+#| warning: false
+#| message: false
+
+plt.figure(figsize=(6,5))
+sns.boxplot(data=df, x="iso3", y="gdp_growth")
+plt.title("GDP Growth Distribution by Country")
+plt.xlabel("Country")
+plt.ylabel("GDP growth (annual %)")
+plt.tight_layout()
+```
+
+The boxplot highlights the stark contrast in GDP growth volatility and levels between China and the United States from 1990 to 2023. China’s distribution is centered much higher, with a median close to 9% annual growth and an interquartile range that remains well above U.S. levels. The upper whisker reaches above 14%, reflecting periods of extremely rapid expansion during the early 2000s. China also shows wider dispersion, indicating greater year-to-year variability in growth. In contrast, the United States exhibits a much lower and more stable growth distribution, with a median around 2–3% and narrower spread. The U.S. distribution includes occasional negative growth years (notably during recessions such as 2008 and 2020), but overall remains tightly clustered. This comparison underscores that China’s economic trajectory has been characterized by high-speed but more volatile growth, while the U.S. follows a more moderate and consistent pattern.
+
+## Alternative View: GDP Growth Over Time (Seaborn)
+
+```{python}
+#| label: fig-gdp-growth-seaborn
+#| fig-cap: "Seaborn line plot of annual GDP growth, highlighting cross-country differences in volatility and timing of shocks."
+#| fig-width: 8
+#| fig-height: 4
+#| warning: false
+#| message: false
+
+plt.figure(figsize=(8,4))
+sns.lineplot(data=df, x="year", y="gdp_growth", hue="iso3", marker="o")
+plt.axhline(0, linewidth=0.7)
+plt.title("GDP Growth Over Time")
+plt.xlabel("Year")
+plt.ylabel("GDP growth (annual %)")
+plt.legend(title="Country")
+plt.tight_layout()
+```
+
+The Seaborn line plot provides a smooth comparative view of annual GDP growth for China and the United States from 1990 to 2023, emphasizing differences in volatility and the timing of major economic shocks. China’s growth trajectory is visibly high and variable, especially during the 1990s and early 2000s, when annual growth frequently exceeded 10%. Over time, however, China shows a gradual deceleration, moving from double-digit growth toward more moderate 5–7% levels. In contrast, U.S. GDP growth remains much lower and more stable throughout the entire period, generally fluctuating between 1% and 4%. The plot also highlights synchronized downturns — most notably the 2008 global financial crisis and the sharp contractions in 2020 — where both countries experience abrupt dips, though the U.S. downturns are typically more severe. Overall, the graph underscores the structural differences between a rapidly industrializing economy (China) and a mature, service-driven economy (the U.S.), reflected in their distinct growth patterns and sensitivity to global shocks.
+
+# Results & Discussion
+
+##  Main Patterns in the Data
+
+Across all indicators, China and the United States follow very different paths from 1990–2023. The U.S. looks like a stable high-income economy, while China behaves like a rapidly transforming, catching-up economy.
+
+- **GDP per capita:**  
+  The U.S. stays high and rises steadily (about \$38k → \$60k+). China starts below \$1k but climbs above \$10k. The income gap remains large, yet the trend clearly shows long-run convergence.
+
+- **Employment-to-population ratio:**  
+  China’s employment rate falls from roughly 77% to the low-60s, consistent with aging, longer schooling, and a shift away from low-productivity work. U.S. employment fluctuates around the low-60% range, with dips during the early-2000s slowdown, the 2008 crisis, and the 2020 pandemic.
+
+- **GDP growth:**  
+  China records very high and volatile growth in the 1990s–2000s and then gradually slows after 2010. U.S. growth is lower (around 1–3%) but more stable, with sharp drops only in 2008 and 2020. Both countries are hit by global shocks, but China’s contractions are smaller and its recoveries faster.
+
+##  Relationships Between Indicators
+
+The scatterplot of **GDP per capita vs. employment** shows two distinct patterns:
+
+- For **China**, higher GDP per capita coincides with *lower* employment rates, suggesting that growth is mainly driven by rising productivity rather than by adding more workers.
+- For the **United States**, GDP per capita is slightly higher when employment is higher, consistent with a demand- and labor-driven economy where participation supports income and consumption.
+
+The **growth boxplots and time-series** reinforce this contrast: China has higher average growth and much more dispersion, while U.S. growth is tightly clustered around 2–3%. This mirrors an economy still undergoing structural change (China) versus a mature, service-based economy (U.S.).
+
+##  Interpretation
+
+Putting these pieces together:
+
+- China is clearly **catching up** in income and economic scale, but still far from U.S. living standards.
+- The United States maintains **stable prosperity**, with smaller swings in growth and employment.
+- Differences in employment trends, growth volatility, and crisis responses reflect contrasting demographics, institutions, and policy frameworks.
+
+# Conclusion
+
+This project shows that China and the United States have moved along very different development paths over the past three decades. China combined falling employment ratios with rapid gains in GDP per capita and historically high growth rates, consistent with a shift toward higher productivity and structural upgrading. The United States, in contrast, exhibits moderate but steady growth, relatively stable employment, and sharper downturns only during major global crises. Overall, the evidence points to ongoing but incomplete income convergence: China is catching up, while the U.S. remains a high-income benchmark. These results highlight how long-run comparative data can clarify both the sources of growth and the vulnerabilities of the world’s two largest economies.

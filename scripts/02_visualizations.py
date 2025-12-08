@@ -49,3 +49,28 @@ plt.legend(); plt.tight_layout(); plt.savefig(os.path.join(OUT,'gdp_vs_employmen
 
 print("Saved visualization PNGs to figures/: gdp_percap_timeseries.png, employment_rate_timeseries.png, gdp_growth_timeseries.png, gdp_vs_employment_scatter.png")
 
+import seaborn as sns
+sns.set(style="whitegrid")
+#GDP growth distribution by country
+plt.figure(figsize=(7,6))
+sns.boxplot(data=df, x="iso3", y="gdp_growth")
+plt.title("GDP Growth Distribution by Country")
+plt.xlabel("Country")
+plt.ylabel("GDP growth (annual %)")
+plt.tight_layout()
+plt.savefig(os.path.join(OUT, "gdp_growth_distribution_by_country.png"))
+plt.close()
+
+#GDP growth over time (seaborn lineplot)
+plt.figure(figsize=(10,6))
+sns.lineplot(data=df, x="year", y="gdp_growth", hue="iso3", marker="o")
+plt.axhline(0, color="k", linewidth=0.7)
+plt.title("GDP Growth Over Time")
+plt.xlabel("Year")
+plt.ylabel("GDP growth (annual %)")
+plt.legend(title="Country")
+plt.tight_layout()
+plt.savefig(os.path.join(OUT, "gdp_growth_over_time.png"))
+plt.close()
+
+print("Saved: gdp_growth_distribution_by_country.png, gdp_growth_over_time.png to figures/")
