@@ -1,0 +1,7 @@
+.venv/
+.quarto/
+report_files/
+report/report_files/
+*.html
+report/*.html
+report/figures/

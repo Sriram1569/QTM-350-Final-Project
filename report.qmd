@@ -1,0 +1,205 @@
+---
+title: "QTM 350 Final Project"
+subtitle: "GDP per Capita & Employment Co-Movement in the USA and China (1990–2023)"
+author:
+  - "Bert Li (Emory ID: bli999)"
+  - "Maanya Ladhani (Emory ID: 2549003)"
+  - "Sriram Subramoniapillai (Emory ID: ss999)"
+  - "Justin He (Emory ID: jhe999)"
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    number-sections: true
+    smooth-scroll: true
+    code-fold: true
+    code-tools: true
+    code-summary: "Show code"
+
+  pdf:
+    toc: true
+    number-sections: true
+    geometry:
+      - margin=1in
+      - paper=a4
+    df-print: paged
+    fontsize: 11pt
+    linestretch: 1.1
+
+jupyter: python3
+
+execute:
+  echo: true
+  warning: false
+  message: false
+  python: ".venv/bin/python"
+---
+
+# Introduction
+
+::: callout-note
+## Research Question
+
+How have **GDP per capita** and **employment rates** co-moved in the  
+**United States** and **China** between **1990 and 2023**?
+:::
+
+The United States and China are the two largest economies in the world, but they have followed very different development paths. The United States is a mature, high-income economy, while China has undergone rapid structural transformation from a low-income to an upper-middle-income country over the past three decades.
+
+By comparing long-run trends in GDP per capita, employment rates, and GDP growth, we aim to understand:
+
+- how each country’s economy evolved over time,  
+- whether labor-market activity and economic growth move together, and  
+- how major shocks (such as the 2008 financial crisis and the COVID-19 pandemic) show up in aggregate indicators.
+
+This report summarizes our dataset, describes the cleaning process, presents visualizations produced by our group, and discusses the main patterns we observe.
+
+---
+
+# Background
+
+GDP per capita is a standard measure of average economic well-being, while the employment-to-population ratio captures how intensively a country’s working-age population is engaged in the labor market. In many advanced economies, these variables tend to move together: strong growth often coincides with high employment, and recessions reduce both income and employment.
+
+China’s growth experience, however, has been driven heavily by investment, exports, and productivity gains. That raises a natural question:  
+
+> **Did China’s extraordinary GDP per capita growth translate into higher employment participation, or did it follow a different pattern than the United States?**
+
+Our analysis focuses on describing these relationships rather than making causal claims.
+
+---
+
+# Data Description
+
+We use data from the **World Development Indicators (WDI)**, a public database maintained by the **World Bank**. Our final dataset combines three annual indicators for **China (CHN)** and the **United States (USA)**:
+
+- **Employment-to-population ratio (%), ages 15+**  
+- **GDP per capita (constant 2015 US$)**  
+- **GDP growth (annual %)**  
+
+## Data Cleaning
+
+Raw data files were initially stored under:
+data/raw/
+
+After downloading, the files were cleaned and standardized. The following steps were applied:
+
+1. **Rename columns**  
+   - `Country Name` → `country_name`  
+   - `Country Code` → `iso3`  
+   - `Year` → `year`  
+   - `Value` → indicator-specific variable name  
+
+2. **Convert data types**  
+   - `year` converted to integer  
+   - numeric fields coerced to proper numeric format  
+
+3. **Filter for analysis scope**  
+   - Countries included: **CHN**, **USA**  
+   - Years included: **1990–2023**
+
+4. **Merge datasets**  
+   All three indicators were merged on `iso3` and `year` to create the final analytical dataset:
+   `country_name | iso3 | year | gdp_per_capita | employment_rate | gdp_growth`
+
+5. **Handle missing values**  
+A missingness audit was generated for all variables and saved to:
+  `figures/missingness.csv`
+
+6. **Generate summary outputs**  
+The following descriptive files were created for reporting:
+  `figures/clean_head.csv
+  figures/descriptive_stats_all.csv
+  figures/descriptive_by_country.csv
+  figures/missingness.csv`
+
+### Python Processing Script Used
+
+```python
+import pandas as pd
+import os
+
+OUT = "figures"
+os.makedirs(OUT, exist_ok=True)
+
+INPUT = "data/processed/merged_data.csv"
+df = pd.read_csv(INPUT)
+
+df.rename(columns={"Country Code": "iso3", "Year": "year"}, inplace=True)
+df["year"] = df["year"].astype(int)
+
+df.head(20).to_csv(os.path.join(OUT, "clean_head.csv"), index=False)
+
+desc = df.describe(include="all")
+desc.to_csv(os.path.join(OUT, "descriptive_stats_all.csv"))
+
+country_desc = df.groupby("iso3")[["gdp_per_capita","employment_rate","gdp_growth"]].describe()
+country_desc.to_csv(os.path.join(OUT, "descriptive_by_country.csv"))
+
+miss = df.isnull().sum().to_frame(name="missing_count")
+miss["pct_missing"] = miss["missing_count"] / len(df) * 100
+miss.to_csv(os.path.join(OUT, "missingness.csv"))
+```
+
+## Descriptive Statistics
+
+The script above produces summary files in the `figures/` folder. Using those outputs, we report the key descriptive statistics for the full sample and by country.
+
+### Overall Summary Statistics (China + USA, 1990–2023)
+```{python}
+import pandas as pd
+
+# Load merged dataset
+df = pd.read_csv("data/processed/merged_data.csv")
+
+# Rename columns so they match expected names
+df = df.rename(columns={
+    "Country Code": "iso3",
+    "Country Name": "country_name",
+    "Year": "year"
+})
+
+# Select numeric columns for overall descriptive stats
+cols = ["year", "gdp_per_capita", "employment_rate", "gdp_growth"]
+
+# 1️OVERALL SUMMARY STATISTICS (China + USA)
+desc_all = df[cols].describe()
+desc_all
+```
+
+The combined dataset for China and the United States from 1990 to 2023 shows substantial variation in economic performance across the four key variables. GDP per capita exhibits a wide distribution, ranging from about $917 to $65,505, reflecting the large income gap between the two economies and their rapid growth over time. Employment rates span from 56.6% to 76.8%, with a mean of roughly 64.8%, indicating relatively stable labor-market participation across years. GDP growth is more volatile, varying from a low of –2.58% to a high of 14.30%, with an average growth rate of 5.66%, capturing both recession periods and rapid expansion phases. The median year value of 2006.5 confirms the balanced coverage of the time series. Overall, the descriptive statistics highlight large cross-country differences and meaningful year-to-year fluctuations that motivate the need for deeper comparative analysis.
+
+### Descriptive Stats by Country
+#### China 
+
+```{python}
+import pandas as pd
+
+# Load data
+df = pd.read_csv("data/processed/merged_data.csv")
+
+# Filter for China only
+china_df = df[df["Country Code"] == "CHN"]
+
+# Select numeric columns and compute descriptive stats
+china_stats = china_df[["gdp_per_capita", "employment_rate", "gdp_growth"]].describe()
+
+china_stats
+```
+China’s descriptive statistics highlight a wide range in economic performance from 1990 to 2023. GDP per capita shows substantial variation—from just under $1,000 to over $12,000—reflecting China’s rapid economic expansion during this period. The mean employment rate is roughly 69%, with values ranging from 62.5% to 76.8%, indicating steady but gradually improving labor-market conditions. GDP growth is the most volatile indicator, with rates spanning from 2.34% to 14.30%, and an average of 8.84%, capturing China’s historically high growth during industrialization and periods of global economic slowdown. Overall, the statistics reveal China’s significant economic development, rising incomes, and relatively stable employment patterns, alongside consistently strong—but fluctuating—economic growth.
+
+#### USA
+
+```{python}
+# Filter for USA only
+usa_df = df[df["Country Code"] == "USA"]
+
+# Compute descriptive stats
+usa_stats = usa_df[["gdp_per_capita", "employment_rate", "gdp_growth"]].describe()
+
+usa_stats
+```
+
+
+
+

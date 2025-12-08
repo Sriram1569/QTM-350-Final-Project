@@ -1,0 +1,3 @@
+execute:
+  python: ".venv/bin/python"
+  kernel: qtm350
