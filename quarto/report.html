@@ -1,0 +1,1595 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Bert Li (Emory ID: 2549011)">
+<meta name="author" content="Maanya Ladhani (Emory ID: 2549003)">
+<meta name="author" content="Sriram Subramoniapillai (Emory ID: 2591970)">
+<meta name="author" content="Justin He (Emory ID: 2549590)">
+
+<title>QTM 350 Final Project</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="report_files/libs/clipboard/clipboard.min.js"></script>
+<script src="report_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="report_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="report_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="report_files/libs/quarto-html/popper.min.js"></script>
+<script src="report_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="report_files/libs/quarto-html/anchor.min.js"></script>
+<link href="report_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="report_files/libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="report_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="report_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="report_files/libs/bootstrap/bootstrap-a74871fe4945b66d259aafc266475145.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<style>html{ scroll-behavior: smooth; }</style>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a></li>
+  <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background"><span class="header-section-number">2</span> Background</a></li>
+  <li><a href="#data-description" id="toc-data-description" class="nav-link" data-scroll-target="#data-description"><span class="header-section-number">3</span> Data Description</a>
+  <ul class="collapse">
+  <li><a href="#data-cleaning" id="toc-data-cleaning" class="nav-link" data-scroll-target="#data-cleaning"><span class="header-section-number">3.1</span> Data Cleaning</a></li>
+  <li><a href="#descriptive-statistics" id="toc-descriptive-statistics" class="nav-link" data-scroll-target="#descriptive-statistics"><span class="header-section-number">3.2</span> Descriptive Statistics</a>
+  <ul class="collapse">
+  <li><a href="#overall-summary-statistics-china-usa-19902023" id="toc-overall-summary-statistics-china-usa-19902023" class="nav-link" data-scroll-target="#overall-summary-statistics-china-usa-19902023"><span class="header-section-number">3.2.1</span> Overall Summary Statistics (China + USA, 1990–2023)</a></li>
+  <li><a href="#descriptive-stats-by-country" id="toc-descriptive-stats-by-country" class="nav-link" data-scroll-target="#descriptive-stats-by-country"><span class="header-section-number">3.2.2</span> Descriptive Stats by Country</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#data-analysis" id="toc-data-analysis" class="nav-link" data-scroll-target="#data-analysis"><span class="header-section-number">4</span> Data Analysis</a>
+  <ul class="collapse">
+  <li><a href="#gdp-per-capita-over-time" id="toc-gdp-per-capita-over-time" class="nav-link" data-scroll-target="#gdp-per-capita-over-time"><span class="header-section-number">4.1</span> GDP per capita over time</a></li>
+  <li><a href="#employment-to-population-ratio-over-time" id="toc-employment-to-population-ratio-over-time" class="nav-link" data-scroll-target="#employment-to-population-ratio-over-time"><span class="header-section-number">4.2</span> Employment-to-Population Ratio Over Time</a></li>
+  <li><a href="#gdp-growth-over-time" id="toc-gdp-growth-over-time" class="nav-link" data-scroll-target="#gdp-growth-over-time"><span class="header-section-number">4.3</span> GDP Growth Over Time</a></li>
+  <li><a href="#gdp-per-capita-vs-employment-rate" id="toc-gdp-per-capita-vs-employment-rate" class="nav-link" data-scroll-target="#gdp-per-capita-vs-employment-rate"><span class="header-section-number">4.4</span> GDP per Capita vs Employment Rate</a></li>
+  <li><a href="#distribution-of-gdp-growth-by-country" id="toc-distribution-of-gdp-growth-by-country" class="nav-link" data-scroll-target="#distribution-of-gdp-growth-by-country"><span class="header-section-number">4.5</span> Distribution of GDP Growth by Country</a></li>
+  <li><a href="#alternative-view-gdp-growth-over-time-seaborn" id="toc-alternative-view-gdp-growth-over-time-seaborn" class="nav-link" data-scroll-target="#alternative-view-gdp-growth-over-time-seaborn"><span class="header-section-number">4.6</span> Alternative View: GDP Growth Over Time (Seaborn)</a></li>
+  </ul></li>
+  <li><a href="#results-discussion" id="toc-results-discussion" class="nav-link" data-scroll-target="#results-discussion"><span class="header-section-number">5</span> Results &amp; Discussion</a>
+  <ul class="collapse">
+  <li><a href="#main-patterns-in-the-data" id="toc-main-patterns-in-the-data" class="nav-link" data-scroll-target="#main-patterns-in-the-data"><span class="header-section-number">5.1</span> Main Patterns in the Data</a></li>
+  <li><a href="#relationships-between-indicators" id="toc-relationships-between-indicators" class="nav-link" data-scroll-target="#relationships-between-indicators"><span class="header-section-number">5.2</span> Relationships Between Indicators</a></li>
+  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation"><span class="header-section-number">5.3</span> Interpretation</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">6</span> Conclusion</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="../report.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">QTM 350 Final Project</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+<p class="subtitle lead">GDP per Capita &amp; Employment Co-Movement in the USA and China (1990–2023)</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Authors</div>
+    <div class="quarto-title-meta-contents">
+             <p>Bert Li (Emory ID: 2549011) </p>
+             <p>Maanya Ladhani (Emory ID: 2549003) </p>
+             <p>Sriram Subramoniapillai (Emory ID: 2591970) </p>
+             <p>Justin He (Emory ID: 2549590) </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Research Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>How have <strong>GDP per capita</strong> and <strong>employment rates</strong> co-moved in the<br>
+<strong>United States</strong> and <strong>China</strong> between <strong>1990 and 2023</strong>?</p>
+</div>
+</div>
+<p>The United States and China are the two largest economies in the world, but they have followed very different development paths. The United States is a mature, high-income economy, while China has undergone rapid structural transformation from a low-income to an upper-middle-income country over the past three decades.</p>
+<p>By comparing long-run trends in GDP per capita, employment rates, and GDP growth, we aim to understand:</p>
+<ul>
+<li>how each country’s economy evolved over time,<br>
+</li>
+<li>whether labor-market activity and economic growth move together, and<br>
+</li>
+<li>how major shocks (such as the 2008 financial crisis and the COVID-19 pandemic) show up in aggregate indicators.</li>
+</ul>
+<p>This report summarizes our dataset, describes the cleaning process, presents visualizations produced by our group, and discusses the main patterns we observe.</p>
+<hr>
+</section>
+<section id="background" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Background</h1>
+<p>GDP per capita is a standard measure of average economic well-being, while the employment-to-population ratio captures how intensively a country’s working-age population is engaged in the labor market. In many advanced economies, these variables tend to move together: strong growth often coincides with high employment, and recessions reduce both income and employment.</p>
+<p>China’s growth experience, however, has been driven heavily by investment, exports, and productivity gains. That raises a natural question:</p>
+<blockquote class="blockquote">
+<p><strong>Did China’s extraordinary GDP per capita growth translate into higher employment participation, or did it follow a different pattern than the United States?</strong></p>
+</blockquote>
+<p>Our analysis focuses on describing these relationships rather than making causal claims.</p>
+<hr>
+</section>
+<section id="data-description" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Data Description</h1>
+<p>We use data from the <strong>World Development Indicators (WDI)</strong>, a public database maintained by the <strong>World Bank</strong>. Our final dataset combines three annual indicators for <strong>China (CHN)</strong> and the <strong>United States (USA)</strong>:</p>
+<ul>
+<li><strong>Employment-to-population ratio (%), ages 15+</strong><br>
+</li>
+<li><strong>GDP per capita (constant 2015 US$)</strong><br>
+</li>
+<li><strong>GDP growth (annual %)</strong></li>
+</ul>
+<section id="data-cleaning" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="data-cleaning"><span class="header-section-number">3.1</span> Data Cleaning</h2>
+<p>Raw data files were initially stored under: data/raw/</p>
+<p>After downloading, the files were cleaned and standardized. The following steps were applied:</p>
+<ol type="1">
+<li><p><strong>Rename columns</strong></p>
+<ul>
+<li><code>Country Name</code> → <code>country_name</code><br>
+</li>
+<li><code>Country Code</code> → <code>iso3</code><br>
+</li>
+<li><code>Year</code> → <code>year</code><br>
+</li>
+<li><code>Value</code> → indicator-specific variable name</li>
+</ul></li>
+<li><p><strong>Convert data types</strong></p>
+<ul>
+<li><code>year</code> converted to integer<br>
+</li>
+<li>numeric fields coerced to proper numeric format</li>
+</ul></li>
+<li><p><strong>Filter for analysis scope</strong></p>
+<ul>
+<li>Countries included: <strong>CHN</strong>, <strong>USA</strong><br>
+</li>
+<li>Years included: <strong>1990–2023</strong></li>
+</ul></li>
+<li><p><strong>Merge datasets</strong><br>
+All three indicators were merged on <code>iso3</code> and <code>year</code> to create the final analytical dataset: <code>country_name | iso3 | year | gdp_per_capita | employment_rate | gdp_growth</code></p></li>
+<li><p><strong>Handle missing values</strong><br>
+A missingness audit was generated for all variables and saved to: <code>figures/missingness.csv</code></p></li>
+<li><p><strong>Generate summary outputs</strong><br>
+The following descriptive files were created for reporting: <code>figures/clean_head.csv   figures/descriptive_stats_all.csv   figures/descriptive_by_country.csv   figures/missingness.csv</code></p></li>
+</ol>
+</section>
+<section id="descriptive-statistics" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="descriptive-statistics"><span class="header-section-number">3.2</span> Descriptive Statistics</h2>
+<p>The script above produces summary files in the <code>figures/</code> folder. Using those outputs, we report the key descriptive statistics for the full sample and by country.</p>
+<section id="overall-summary-statistics-china-usa-19902023" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="overall-summary-statistics-china-usa-19902023"><span class="header-section-number">3.2.1</span> Overall Summary Statistics (China + USA, 1990–2023)</h3>
+<div id="9e646133" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load merged dataset</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"../data/processed/merged_data.csv"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Rename columns so they match expected names</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.rename(columns<span class="op">=</span>{</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Country Code"</span>: <span class="st">"iso3"</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Country Name"</span>: <span class="st">"country_name"</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Year"</span>: <span class="st">"year"</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Select numeric columns for overall descriptive stats</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>cols <span class="op">=</span> [<span class="st">"year"</span>, <span class="st">"gdp_per_capita"</span>, <span class="st">"employment_rate"</span>, <span class="st">"gdp_growth"</span>]</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># 1️OVERALL SUMMARY STATISTICS (China + USA)</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>desc_all <span class="op">=</span> df[cols].describe()</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>desc_all</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">gdp_per_capita</th>
+<th data-quarto-table-cell-role="th">employment_rate</th>
+<th data-quarto-table-cell-role="th">gdp_growth</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">count</th>
+<td>68.000000</td>
+<td>68.000000</td>
+<td>66.000000</td>
+<td>68.000000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">mean</th>
+<td>2006.500000</td>
+<td>28316.096098</td>
+<td>64.795833</td>
+<td>5.663084</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">std</th>
+<td>9.883652</td>
+<td>24045.194086</td>
+<td>5.398997</td>
+<td>3.986074</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">min</th>
+<td>1990.000000</td>
+<td>917.270662</td>
+<td>56.598000</td>
+<td>-2.576500</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">25%</th>
+<td>1998.000000</td>
+<td>4278.156289</td>
+<td>60.595000</td>
+<td>2.659279</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">50%</th>
+<td>2006.500000</td>
+<td>25560.998850</td>
+<td>62.906500</td>
+<td>4.465131</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">75%</th>
+<td>2015.000000</td>
+<td>52690.349226</td>
+<td>68.702250</td>
+<td>8.750672</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">max</th>
+<td>2023.000000</td>
+<td>65505.255701</td>
+<td>76.840000</td>
+<td>14.299611</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>The combined dataset for China and the United States from 1990 to 2023 shows substantial variation in economic performance across the four key variables. GDP per capita exhibits a wide distribution, ranging from about $917 to $65,505, reflecting the large income gap between the two economies and their rapid growth over time. Employment rates span from 56.6% to 76.8%, with a mean of roughly 64.8%, indicating relatively stable labor-market participation across years. GDP growth is more volatile, varying from a low of –2.58% to a high of 14.30%, with an average growth rate of 5.66%, capturing both recession periods and rapid expansion phases. The median year value of 2006.5 confirms the balanced coverage of the time series. Overall, the descriptive statistics highlight large cross-country differences and meaningful year-to-year fluctuations that motivate the need for deeper comparative analysis.</p>
+</section>
+<section id="descriptive-stats-by-country" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="descriptive-stats-by-country"><span class="header-section-number">3.2.2</span> Descriptive Stats by Country</h3>
+<section id="china" class="level4" data-number="3.2.2.1">
+<h4 data-number="3.2.2.1" class="anchored" data-anchor-id="china"><span class="header-section-number">3.2.2.1</span> China</h4>
+<div id="33886947" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"../data/processed/merged_data.csv"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter for China only</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>china_df <span class="op">=</span> df[df[<span class="st">"Country Code"</span>] <span class="op">==</span> <span class="st">"CHN"</span>]</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Select numeric columns and compute descriptive stats</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>china_stats <span class="op">=</span> china_df[[<span class="st">"gdp_per_capita"</span>, <span class="st">"employment_rate"</span>, <span class="st">"gdp_growth"</span>]].describe()</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>china_stats</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">gdp_per_capita</th>
+<th data-quarto-table-cell-role="th">employment_rate</th>
+<th data-quarto-table-cell-role="th">gdp_growth</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">count</th>
+<td>34.000000</td>
+<td>33.000000</td>
+<td>34.000000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">mean</th>
+<td>5177.692768</td>
+<td>69.123242</td>
+<td>8.835048</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">std</th>
+<td>3663.094727</td>
+<td>4.132756</td>
+<td>2.904720</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">min</th>
+<td>917.270662</td>
+<td>62.523000</td>
+<td>2.340188</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">25%</th>
+<td>1977.532430</td>
+<td>66.078000</td>
+<td>7.099560</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">50%</th>
+<td>4146.555569</td>
+<td>68.824000</td>
+<td>8.914913</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">75%</th>
+<td>8053.144120</td>
+<td>72.293000</td>
+<td>10.128104</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">max</th>
+<td>12484.157884</td>
+<td>76.840000</td>
+<td>14.299611</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>China’s descriptive statistics highlight a wide range in economic performance from 1990 to 2023. GDP per capita shows substantial variation—from just under $1,000 to over $12,000—reflecting China’s rapid economic expansion during this period. The mean employment rate is roughly 69%, with values ranging from 62.5% to 76.8%, indicating steady but gradually improving labor-market conditions. GDP growth is the most volatile indicator, with rates spanning from 2.34% to 14.30%, and an average of 8.84%, capturing China’s historically high growth during industrialization and periods of global economic slowdown. Overall, the statistics reveal China’s significant economic development, rising incomes, and relatively stable employment patterns, alongside consistently strong—but fluctuating—economic growth.</p>
+</section>
+<section id="usa" class="level4" data-number="3.2.2.2">
+<h4 data-number="3.2.2.2" class="anchored" data-anchor-id="usa"><span class="header-section-number">3.2.2.2</span> USA</h4>
+<div id="1fe245e0" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter for USA only</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>usa_df <span class="op">=</span> df[df[<span class="st">"Country Code"</span>] <span class="op">==</span> <span class="st">"USA"</span>]</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute descriptive stats</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>usa_stats <span class="op">=</span> usa_df[[<span class="st">"gdp_per_capita"</span>, <span class="st">"employment_rate"</span>, <span class="st">"gdp_growth"</span>]].describe()</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>usa_stats</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">gdp_per_capita</th>
+<th data-quarto-table-cell-role="th">employment_rate</th>
+<th data-quarto-table-cell-role="th">gdp_growth</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">count</th>
+<td>34.000000</td>
+<td>33.000000</td>
+<td>34.000000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">mean</th>
+<td>51454.499428</td>
+<td>60.468424</td>
+<td>2.491121</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">std</th>
+<td>7564.771147</td>
+<td>1.872493</td>
+<td>1.757601</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">min</th>
+<td>38637.839816</td>
+<td>56.598000</td>
+<td>-2.576500</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">25%</th>
+<td>46005.884396</td>
+<td>58.979000</td>
+<td>1.915439</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">50%</th>
+<td>52731.127146</td>
+<td>60.580000</td>
+<td>2.689812</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">75%</th>
+<td>56553.412623</td>
+<td>61.897000</td>
+<td>3.512760</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">max</th>
+<td>65505.255701</td>
+<td>63.506000</td>
+<td>6.055053</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>The United States displays consistently high income levels over the 1990–2023 period, with GDP per capita ranging from about $38,600 to $65,500 and an average of $51,454, reflecting a stable, mature high-income economy. Employment rates show relatively low volatility, fluctuating between 56.6% and 63.5%, with a mean of 60.5%, indicating steady labor-market participation despite business cycle fluctuations such as the 2008 financial crisis and the COVID-19 recession. GDP growth varies more modestly than China’s, from –2.58% to 6.06%, averaging 2.49%, consistent with long-run U.S. economic trends of slower but stable growth. Overall, the U.S. statistics highlight a high-income economy with stable employment patterns and moderate economic growth volatility.</p>
+</section>
+</section>
+</section>
+</section>
+<section id="data-analysis" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Data Analysis</h1>
+<section id="gdp-per-capita-over-time" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="gdp-per-capita-over-time"><span class="header-section-number">4.1</span> GDP per capita over time</h2>
+<div id="cell-fig-gdp-percap" class="cell" data-fig-height="4" data-fig-width="8" data-message="false" data-execution_count="5">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">4</span>))</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> c <span class="kw">in</span> df[<span class="st">"iso3"</span>].unique():</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    s <span class="op">=</span> df[df[<span class="st">"iso3"</span>] <span class="op">==</span> c]</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    plt.plot(s[<span class="st">"year"</span>], s[<span class="st">"gdp_per_capita"</span>], marker<span class="op">=</span><span class="st">"o"</span>, label<span class="op">=</span>c)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"GDP per capita (constant 2015 US$)"</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Year"</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"GDP per capita"</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>plt.legend(title<span class="op">=</span><span class="st">"Country"</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>plt.grid(alpha<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-gdp-percap" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-gdp-percap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="report_files/figure-html/fig-gdp-percap-output-1.png" width="752" height="367" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gdp-percap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: GDP per capita (constant 2015 US$) for China (CHN) and the United States (USA), 1990–2023.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>This chart compares the long-run evolution of GDP per capita in China (CHN) and the United States (USA) from 1990 to 2023. The United States starts the period at a much higher income level—around $39,000—consistent with its status as a mature, high-income economy. Growth is steady but moderate, rising to roughly $65,000 by 2023.</p>
+<p>China, by contrast, begins at extremely low income levels (under $1,000) but shows rapid, sustained growth, especially after the early 2000s. By 2023, China surpasses $10,000 per capita. Although still far below the U.S., the rate of improvement is dramatic, reflecting China’s large-scale industrialization and economic reforms.</p>
+<p>Overall, the figure illustrates a persistent income gap between the two countries, but also highlights China’s exceptional catch-up growth trajectory, which is far faster than the U.S. in relative terms.</p>
+</section>
+<section id="employment-to-population-ratio-over-time" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="employment-to-population-ratio-over-time"><span class="header-section-number">4.2</span> Employment-to-Population Ratio Over Time</h2>
+<div id="cell-fig-employment-rate" class="cell" data-fig-height="4" data-fig-width="8" data-message="false" data-execution_count="6">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">4</span>))</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> c <span class="kw">in</span> df[<span class="st">"iso3"</span>].unique():</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    s <span class="op">=</span> df[df[<span class="st">"iso3"</span>] <span class="op">==</span> c]</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    plt.plot(s[<span class="st">"year"</span>], s[<span class="st">"employment_rate"</span>], marker<span class="op">=</span><span class="st">"o"</span>, label<span class="op">=</span>c)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Employment-to-population ratio (15+, %)"</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Year"</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Employment rate (%)"</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>plt.legend(title<span class="op">=</span><span class="st">"Country"</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>plt.grid(alpha<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-employment-rate" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-employment-rate-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="report_files/figure-html/fig-employment-rate-output-1.png" width="752" height="368" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-employment-rate-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Employment-to-population ratio (ages 15+, %) for China and the United States, 1990–2023.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The employment-to-population ratio has followed very different trajectories in China and the United States from 1990 to 2023. China begins the period with an exceptionally high employment rate—around 77%—but experiences a steady long-term decline, falling to roughly 63% by 2023 as the country undergoes demographic aging, structural economic shifts, and expanded education enrollment. In contrast, the United States starts much lower, near 61%, and shows moderate cyclical movement rather than a clear long-term trend. U.S. employment rises through the late 1990s, dips sharply during the 2008 financial crisis, recovers gradually, and then experiences another dramatic drop during the COVID-19 pandemic before partially rebounding. Overall, China maintains higher employment participation throughout the entire period, while the U.S. exhibits greater sensitivity to economic shocks and business-cycle fluctuations.</p>
+</section>
+<section id="gdp-growth-over-time" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="gdp-growth-over-time"><span class="header-section-number">4.3</span> GDP Growth Over Time</h2>
+<div id="cell-fig-gdp-growth-timeseries" class="cell" data-fig-height="4" data-fig-width="8" data-message="false" data-execution_count="7">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">4</span>))</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> c <span class="kw">in</span> df[<span class="st">"iso3"</span>].unique():</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    s <span class="op">=</span> df[df[<span class="st">"iso3"</span>] <span class="op">==</span> c]</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    plt.plot(s[<span class="st">"year"</span>], s[<span class="st">"gdp_growth"</span>], marker<span class="op">=</span><span class="st">"o"</span>, label<span class="op">=</span>c)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"GDP growth (annual %)"</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Year"</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"GDP growth (%)"</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>plt.axhline(<span class="dv">0</span>, linewidth<span class="op">=</span><span class="fl">0.6</span>)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>plt.legend(title<span class="op">=</span><span class="st">"Country"</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>plt.grid(alpha<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-gdp-growth-timeseries" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-gdp-growth-timeseries-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="report_files/figure-html/fig-gdp-growth-timeseries-output-1.png" width="752" height="368" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gdp-growth-timeseries-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Annual real GDP growth (%) in China and the United States, 1990–2023.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The GDP growth trajectories of China and the United States from 1990 to 2023 reveal sharp contrasts in both level and volatility. China begins the period with exceptionally rapid expansion—often exceeding 10% throughout the 1990s and mid-2000s—reflecting its industrialization, export-led boom, and structural reforms. Growth gradually tapers as China transitions toward a more mature, consumption-driven economy, but it remains consistently higher than that of the United States, even during periods of global downturn. The United States, by comparison, exhibits much lower and more stable growth, generally fluctuating between 1% and 4%, with two major negative shocks: the 2009 recession during the global financial crisis and the steep contraction in 2020 due to the COVID-19 pandemic. Despite these shocks, U.S. growth rebounds quickly afterward. Overall, the figure highlights China’s long-run deceleration from extremely high growth rates and the United States’ cyclical but comparatively modest economic fluctuations.</p>
+</section>
+<section id="gdp-per-capita-vs-employment-rate" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="gdp-per-capita-vs-employment-rate"><span class="header-section-number">4.4</span> GDP per Capita vs Employment Rate</h2>
+<div id="cell-fig-gdp-vs-employment" class="cell" data-fig-height="5" data-fig-width="6" data-message="false" data-execution_count="8">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>,<span class="dv">5</span>))</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> c <span class="kw">in</span> df[<span class="st">"iso3"</span>].unique():</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    s <span class="op">=</span> df[df[<span class="st">"iso3"</span>] <span class="op">==</span> c]</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    plt.scatter(</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        s[<span class="st">"employment_rate"</span>],</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        s[<span class="st">"gdp_per_capita"</span>],</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        label<span class="op">=</span>c,</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>        alpha<span class="op">=</span><span class="fl">0.8</span>,</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>        s<span class="op">=</span><span class="dv">40</span>,</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Employment rate (%)"</span>)</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"GDP per capita"</span>)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"GDP per capita vs Employment rate"</span>)</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>plt.legend(title<span class="op">=</span><span class="st">"Country"</span>)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-gdp-vs-employment" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-gdp-vs-employment-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="report_files/figure-html/fig-gdp-vs-employment-output-1.png" width="560" height="463" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gdp-vs-employment-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Scatterplot of GDP per capita vs.&nbsp;employment rate (1990–2023) for China and the United States.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The scatterplot of GDP per capita versus employment rate highlights the fundamentally different economic structures of China and the United States. For China, lower employment rates (around 62–77%) correspond to significantly lower GDP per capita levels, forming a downward-sloping pattern: as China’s employment rate gradually declined over time, GDP per capita steadily increased from low levels. In contrast, the U.S. points cluster at much higher GDP per capita values ($40,000–$65,000) despite having lower and narrower employment rates (roughly 57–63%). The lack of overlap between the two countries shows that employment rate alone does not explain income differences; instead, structural productivity differences dominate. Overall, the figure illustrates that China’s rapid income growth occurred even as employment participation fell, while the U.S. maintains high GDP per capita despite relatively modest employment rates.</p>
+</section>
+<section id="distribution-of-gdp-growth-by-country" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="distribution-of-gdp-growth-by-country"><span class="header-section-number">4.5</span> Distribution of GDP Growth by Country</h2>
+<div id="cell-fig-gdp-growth-box" class="cell" data-fig-height="5" data-fig-width="6" data-message="false" data-execution_count="9">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>,<span class="dv">5</span>))</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>sns.boxplot(data<span class="op">=</span>df, x<span class="op">=</span><span class="st">"iso3"</span>, y<span class="op">=</span><span class="st">"gdp_growth"</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"GDP Growth Distribution by Country"</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Country"</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"GDP growth (annual %)"</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-gdp-growth-box" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-gdp-growth-box-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="report_files/figure-html/fig-gdp-growth-box-output-1.png" width="560" height="463" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gdp-growth-box-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Boxplot of annual GDP growth rates by country, 1990–2023.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The boxplot highlights the stark contrast in GDP growth volatility and levels between China and the United States from 1990 to 2023. China’s distribution is centered much higher, with a median close to 9% annual growth and an interquartile range that remains well above U.S. levels. The upper whisker reaches above 14%, reflecting periods of extremely rapid expansion during the early 2000s. China also shows wider dispersion, indicating greater year-to-year variability in growth. In contrast, the United States exhibits a much lower and more stable growth distribution, with a median around 2–3% and narrower spread. The U.S. distribution includes occasional negative growth years (notably during recessions such as 2008 and 2020), but overall remains tightly clustered. This comparison underscores that China’s economic trajectory has been characterized by high-speed but more volatile growth, while the U.S. follows a more moderate and consistent pattern.</p>
+</section>
+<section id="alternative-view-gdp-growth-over-time-seaborn" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="alternative-view-gdp-growth-over-time-seaborn"><span class="header-section-number">4.6</span> Alternative View: GDP Growth Over Time (Seaborn)</h2>
+<div id="cell-fig-gdp-growth-seaborn" class="cell" data-fig-height="4" data-fig-width="8" data-message="false" data-execution_count="10">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">4</span>))</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>sns.lineplot(data<span class="op">=</span>df, x<span class="op">=</span><span class="st">"year"</span>, y<span class="op">=</span><span class="st">"gdp_growth"</span>, hue<span class="op">=</span><span class="st">"iso3"</span>, marker<span class="op">=</span><span class="st">"o"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>plt.axhline(<span class="dv">0</span>, linewidth<span class="op">=</span><span class="fl">0.7</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"GDP Growth Over Time"</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Year"</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"GDP growth (annual %)"</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>plt.legend(title<span class="op">=</span><span class="st">"Country"</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-gdp-growth-seaborn" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-gdp-growth-seaborn-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="report_files/figure-html/fig-gdp-growth-seaborn-output-1.png" width="752" height="368" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gdp-growth-seaborn-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Seaborn line plot of annual GDP growth, highlighting cross-country differences in volatility and timing of shocks.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The Seaborn line plot provides a smooth comparative view of annual GDP growth for China and the United States from 1990 to 2023, emphasizing differences in volatility and the timing of major economic shocks. China’s growth trajectory is visibly high and variable, especially during the 1990s and early 2000s, when annual growth frequently exceeded 10%. Over time, however, China shows a gradual deceleration, moving from double-digit growth toward more moderate 5–7% levels. In contrast, U.S. GDP growth remains much lower and more stable throughout the entire period, generally fluctuating between 1% and 4%. The plot also highlights synchronized downturns — most notably the 2008 global financial crisis and the sharp contractions in 2020 — where both countries experience abrupt dips, though the U.S. downturns are typically more severe. Overall, the graph underscores the structural differences between a rapidly industrializing economy (China) and a mature, service-driven economy (the U.S.), reflected in their distinct growth patterns and sensitivity to global shocks.</p>
+</section>
+</section>
+<section id="results-discussion" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Results &amp; Discussion</h1>
+<section id="main-patterns-in-the-data" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="main-patterns-in-the-data"><span class="header-section-number">5.1</span> Main Patterns in the Data</h2>
+<p>Across all indicators, China and the United States follow very different paths from 1990–2023. The U.S. looks like a stable high-income economy, while China behaves like a rapidly transforming, catching-up economy.</p>
+<ul>
+<li><p><strong>GDP per capita:</strong><br>
+The U.S. stays high and rises steadily (about $38k → $60k+). China starts below $1k but climbs above $10k. The income gap remains large, yet the trend clearly shows long-run convergence.</p></li>
+<li><p><strong>Employment-to-population ratio:</strong><br>
+China’s employment rate falls from roughly 77% to the low-60s, consistent with aging, longer schooling, and a shift away from low-productivity work. U.S. employment fluctuates around the low-60% range, with dips during the early-2000s slowdown, the 2008 crisis, and the 2020 pandemic.</p></li>
+<li><p><strong>GDP growth:</strong><br>
+China records very high and volatile growth in the 1990s–2000s and then gradually slows after 2010. U.S. growth is lower (around 1–3%) but more stable, with sharp drops only in 2008 and 2020. Both countries are hit by global shocks, but China’s contractions are smaller and its recoveries faster.</p></li>
+</ul>
+</section>
+<section id="relationships-between-indicators" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="relationships-between-indicators"><span class="header-section-number">5.2</span> Relationships Between Indicators</h2>
+<p>The scatterplot of <strong>GDP per capita vs.&nbsp;employment</strong> shows two distinct patterns:</p>
+<ul>
+<li>For <strong>China</strong>, higher GDP per capita coincides with <em>lower</em> employment rates, suggesting that growth is mainly driven by rising productivity rather than by adding more workers.</li>
+<li>For the <strong>United States</strong>, GDP per capita is slightly higher when employment is higher, consistent with a demand- and labor-driven economy where participation supports income and consumption.</li>
+</ul>
+<p>The <strong>growth boxplots and time-series</strong> reinforce this contrast: China has higher average growth and much more dispersion, while U.S. growth is tightly clustered around 2–3%. This mirrors an economy still undergoing structural change (China) versus a mature, service-based economy (U.S.).</p>
+</section>
+<section id="interpretation" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="interpretation"><span class="header-section-number">5.3</span> Interpretation</h2>
+<p>Putting these pieces together:</p>
+<ul>
+<li>China is clearly <strong>catching up</strong> in income and economic scale, but still far from U.S. living standards.</li>
+<li>The United States maintains <strong>stable prosperity</strong>, with smaller swings in growth and employment.</li>
+<li>Differences in employment trends, growth volatility, and crisis responses reflect contrasting demographics, institutions, and policy frameworks.</li>
+</ul>
+</section>
+</section>
+<section id="conclusion" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Conclusion</h1>
+<p>This project shows that China and the United States have moved along very different development paths over the past three decades. China combined falling employment ratios with rapid gains in GDP per capita and historically high growth rates, consistent with a shift toward higher productivity and structural upgrading. The United States, in contrast, exhibits moderate but steady growth, relatively stable employment, and sharper downturns only during major global crises. Overall, the evidence points to ongoing but incomplete income convergence: China is catching up, while the U.S. remains a high-income benchmark. These results highlight how long-run comparative data can clarify both the sources of growth and the vulnerabilities of the world’s two largest economies.</p>
+<!-- -->
+
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "QTM 350 Final Project"</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "GDP per Capita &amp; Employment Co-Movement in the USA and China (1990–2023)"</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">  - "Bert Li (Emory ID: 2549011)"</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">  - "Maanya Ladhani (Emory ID: 2549003)"</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - "Sriram Subramoniapillai (Emory ID: 2591970)"</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - "Justin He (Emory ID: 2549590)"</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co">    theme: cosmo</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="co">    number-sections: true</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="co">    smooth-scroll: true</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: true</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="co">    page-numbering: true</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="co">    code-summary: "Show code"</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="co">  pdf:</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="co">    number-sections: true</span></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="co">    geometry: "margin=1in"</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="co">    fontsize: 11pt</span></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a><span class="co">    linestretch: 1.1</span></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a><span class="an">jupyter:</span><span class="co"> python3</span></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a><span class="an">execute:</span></span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a><span class="co">  echo: true</span></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a><span class="co">  warning: false</span></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a><span class="co">  message: false</span></span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a><span class="co">  python: ".venv/bin/python"</span></span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a><span class="fu"># Introduction</span></span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a><span class="fu">## Research Question</span></span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>How have **GDP per capita** and **employment rates** co-moved in the  </span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a>**United States** and **China** between **1990 and 2023**?</span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a>The United States and China are the two largest economies in the world, but they have followed very different development paths. The United States is a mature, high-income economy, while China has undergone rapid structural transformation from a low-income to an upper-middle-income country over the past three decades.</span>
+<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a>By comparing long-run trends in GDP per capita, employment rates, and GDP growth, we aim to understand:</span>
+<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>how each country’s economy evolved over time,  </span>
+<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>whether labor-market activity and economic growth move together, and  </span>
+<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>how major shocks (such as the 2008 financial crisis and the COVID-19 pandemic) show up in aggregate indicators.</span>
+<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a>This report summarizes our dataset, describes the cleaning process, presents visualizations produced by our group, and discusses the main patterns we observe.</span>
+<span id="cb10-55"><a href="#cb10-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb10-57"><a href="#cb10-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-58"><a href="#cb10-58" aria-hidden="true" tabindex="-1"></a><span class="fu"># Background</span></span>
+<span id="cb10-59"><a href="#cb10-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-60"><a href="#cb10-60" aria-hidden="true" tabindex="-1"></a>GDP per capita is a standard measure of average economic well-being, while the employment-to-population ratio captures how intensively a country’s working-age population is engaged in the labor market. In many advanced economies, these variables tend to move together: strong growth often coincides with high employment, and recessions reduce both income and employment.</span>
+<span id="cb10-61"><a href="#cb10-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-62"><a href="#cb10-62" aria-hidden="true" tabindex="-1"></a>China’s growth experience, however, has been driven heavily by investment, exports, and productivity gains. That raises a natural question:  </span>
+<span id="cb10-63"><a href="#cb10-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-64"><a href="#cb10-64" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **Did China’s extraordinary GDP per capita growth translate into higher employment participation, or did it follow a different pattern than the United States?**</span></span>
+<span id="cb10-65"><a href="#cb10-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-66"><a href="#cb10-66" aria-hidden="true" tabindex="-1"></a>Our analysis focuses on describing these relationships rather than making causal claims.</span>
+<span id="cb10-67"><a href="#cb10-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-68"><a href="#cb10-68" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb10-69"><a href="#cb10-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-70"><a href="#cb10-70" aria-hidden="true" tabindex="-1"></a><span class="fu"># Data Description</span></span>
+<span id="cb10-71"><a href="#cb10-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-72"><a href="#cb10-72" aria-hidden="true" tabindex="-1"></a>We use data from the **World Development Indicators (WDI)**, a public database maintained by the **World Bank**. Our final dataset combines three annual indicators for **China (CHN)** and the **United States (USA)**:</span>
+<span id="cb10-73"><a href="#cb10-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-74"><a href="#cb10-74" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Employment-to-population ratio (%), ages 15+**  </span>
+<span id="cb10-75"><a href="#cb10-75" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**GDP per capita (constant 2015 US$)**  </span>
+<span id="cb10-76"><a href="#cb10-76" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**GDP growth (annual %)**  </span>
+<span id="cb10-77"><a href="#cb10-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-78"><a href="#cb10-78" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data Cleaning</span></span>
+<span id="cb10-79"><a href="#cb10-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-80"><a href="#cb10-80" aria-hidden="true" tabindex="-1"></a>Raw data files were initially stored under:</span>
+<span id="cb10-81"><a href="#cb10-81" aria-hidden="true" tabindex="-1"></a>data/raw/</span>
+<span id="cb10-82"><a href="#cb10-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-83"><a href="#cb10-83" aria-hidden="true" tabindex="-1"></a>After downloading, the files were cleaned and standardized. The following steps were applied:</span>
+<span id="cb10-84"><a href="#cb10-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-85"><a href="#cb10-85" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**Rename columns**  </span>
+<span id="cb10-86"><a href="#cb10-86" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span><span class="in">`Country Name`</span> → <span class="in">`country_name`</span>  </span>
+<span id="cb10-87"><a href="#cb10-87" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span><span class="in">`Country Code`</span> → <span class="in">`iso3`</span>  </span>
+<span id="cb10-88"><a href="#cb10-88" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span><span class="in">`Year`</span> → <span class="in">`year`</span>  </span>
+<span id="cb10-89"><a href="#cb10-89" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span><span class="in">`Value`</span> → indicator-specific variable name  </span>
+<span id="cb10-90"><a href="#cb10-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-91"><a href="#cb10-91" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Convert data types**  </span>
+<span id="cb10-92"><a href="#cb10-92" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span><span class="in">`year`</span> converted to integer  </span>
+<span id="cb10-93"><a href="#cb10-93" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>numeric fields coerced to proper numeric format  </span>
+<span id="cb10-94"><a href="#cb10-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-95"><a href="#cb10-95" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**Filter for analysis scope**  </span>
+<span id="cb10-96"><a href="#cb10-96" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Countries included: **CHN**, **USA**  </span>
+<span id="cb10-97"><a href="#cb10-97" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Years included: **1990–2023**</span>
+<span id="cb10-98"><a href="#cb10-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-99"><a href="#cb10-99" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**Merge datasets**  </span>
+<span id="cb10-100"><a href="#cb10-100" aria-hidden="true" tabindex="-1"></a>   All three indicators were merged on <span class="in">`iso3`</span> and <span class="in">`year`</span> to create the final analytical dataset:</span>
+<span id="cb10-101"><a href="#cb10-101" aria-hidden="true" tabindex="-1"></a>   <span class="in">`country_name | iso3 | year | gdp_per_capita | employment_rate | gdp_growth`</span></span>
+<span id="cb10-102"><a href="#cb10-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-103"><a href="#cb10-103" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>**Handle missing values**  </span>
+<span id="cb10-104"><a href="#cb10-104" aria-hidden="true" tabindex="-1"></a>A missingness audit was generated for all variables and saved to:</span>
+<span id="cb10-105"><a href="#cb10-105" aria-hidden="true" tabindex="-1"></a>  <span class="in">`figures/missingness.csv`</span></span>
+<span id="cb10-106"><a href="#cb10-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-107"><a href="#cb10-107" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>**Generate summary outputs**  </span>
+<span id="cb10-108"><a href="#cb10-108" aria-hidden="true" tabindex="-1"></a>The following descriptive files were created for reporting:</span>
+<span id="cb10-109"><a href="#cb10-109" aria-hidden="true" tabindex="-1"></a>  `figures/clean_head.csv</span>
+<span id="cb10-110"><a href="#cb10-110" aria-hidden="true" tabindex="-1"></a>  figures/descriptive_stats_all.csv</span>
+<span id="cb10-111"><a href="#cb10-111" aria-hidden="true" tabindex="-1"></a>  figures/descriptive_by_country.csv</span>
+<span id="cb10-112"><a href="#cb10-112" aria-hidden="true" tabindex="-1"></a>  figures/missingness.csv`</span>
+<span id="cb10-113"><a href="#cb10-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-114"><a href="#cb10-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-115"><a href="#cb10-115" aria-hidden="true" tabindex="-1"></a><span class="fu">## Descriptive Statistics</span></span>
+<span id="cb10-116"><a href="#cb10-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-117"><a href="#cb10-117" aria-hidden="true" tabindex="-1"></a>The script above produces summary files in the <span class="in">`figures/`</span> folder. Using those outputs, we report the key descriptive statistics for the full sample and by country.</span>
+<span id="cb10-118"><a href="#cb10-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-119"><a href="#cb10-119" aria-hidden="true" tabindex="-1"></a><span class="fu">### Overall Summary Statistics (China + USA, 1990–2023)</span></span>
+<span id="cb10-122"><a href="#cb10-122" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb10-123"><a href="#cb10-123" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb10-124"><a href="#cb10-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-125"><a href="#cb10-125" aria-hidden="true" tabindex="-1"></a><span class="co"># Load merged dataset</span></span>
+<span id="cb10-126"><a href="#cb10-126" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"../data/processed/merged_data.csv"</span>)</span>
+<span id="cb10-127"><a href="#cb10-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-128"><a href="#cb10-128" aria-hidden="true" tabindex="-1"></a><span class="co"># Rename columns so they match expected names</span></span>
+<span id="cb10-129"><a href="#cb10-129" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.rename(columns<span class="op">=</span>{</span>
+<span id="cb10-130"><a href="#cb10-130" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Country Code"</span>: <span class="st">"iso3"</span>,</span>
+<span id="cb10-131"><a href="#cb10-131" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Country Name"</span>: <span class="st">"country_name"</span>,</span>
+<span id="cb10-132"><a href="#cb10-132" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Year"</span>: <span class="st">"year"</span></span>
+<span id="cb10-133"><a href="#cb10-133" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb10-134"><a href="#cb10-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-135"><a href="#cb10-135" aria-hidden="true" tabindex="-1"></a><span class="co"># Select numeric columns for overall descriptive stats</span></span>
+<span id="cb10-136"><a href="#cb10-136" aria-hidden="true" tabindex="-1"></a>cols <span class="op">=</span> [<span class="st">"year"</span>, <span class="st">"gdp_per_capita"</span>, <span class="st">"employment_rate"</span>, <span class="st">"gdp_growth"</span>]</span>
+<span id="cb10-137"><a href="#cb10-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-138"><a href="#cb10-138" aria-hidden="true" tabindex="-1"></a><span class="co"># 1️OVERALL SUMMARY STATISTICS (China + USA)</span></span>
+<span id="cb10-139"><a href="#cb10-139" aria-hidden="true" tabindex="-1"></a>desc_all <span class="op">=</span> df[cols].describe()</span>
+<span id="cb10-140"><a href="#cb10-140" aria-hidden="true" tabindex="-1"></a>desc_all</span>
+<span id="cb10-141"><a href="#cb10-141" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-142"><a href="#cb10-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-143"><a href="#cb10-143" aria-hidden="true" tabindex="-1"></a>The combined dataset for China and the United States from 1990 to 2023 shows substantial variation in economic performance across the four key variables. GDP per capita exhibits a wide distribution, ranging from about $917 to $65,505, reflecting the large income gap between the two economies and their rapid growth over time. Employment rates span from 56.6% to 76.8%, with a mean of roughly 64.8%, indicating relatively stable labor-market participation across years. GDP growth is more volatile, varying from a low of –2.58% to a high of 14.30%, with an average growth rate of 5.66%, capturing both recession periods and rapid expansion phases. The median year value of 2006.5 confirms the balanced coverage of the time series. Overall, the descriptive statistics highlight large cross-country differences and meaningful year-to-year fluctuations that motivate the need for deeper comparative analysis.</span>
+<span id="cb10-144"><a href="#cb10-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-145"><a href="#cb10-145" aria-hidden="true" tabindex="-1"></a><span class="fu">### Descriptive Stats by Country</span></span>
+<span id="cb10-146"><a href="#cb10-146" aria-hidden="true" tabindex="-1"></a><span class="fu">#### China </span></span>
+<span id="cb10-147"><a href="#cb10-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-150"><a href="#cb10-150" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb10-151"><a href="#cb10-151" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb10-152"><a href="#cb10-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-153"><a href="#cb10-153" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
+<span id="cb10-154"><a href="#cb10-154" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"../data/processed/merged_data.csv"</span>)</span>
+<span id="cb10-155"><a href="#cb10-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-156"><a href="#cb10-156" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter for China only</span></span>
+<span id="cb10-157"><a href="#cb10-157" aria-hidden="true" tabindex="-1"></a>china_df <span class="op">=</span> df[df[<span class="st">"Country Code"</span>] <span class="op">==</span> <span class="st">"CHN"</span>]</span>
+<span id="cb10-158"><a href="#cb10-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-159"><a href="#cb10-159" aria-hidden="true" tabindex="-1"></a><span class="co"># Select numeric columns and compute descriptive stats</span></span>
+<span id="cb10-160"><a href="#cb10-160" aria-hidden="true" tabindex="-1"></a>china_stats <span class="op">=</span> china_df[[<span class="st">"gdp_per_capita"</span>, <span class="st">"employment_rate"</span>, <span class="st">"gdp_growth"</span>]].describe()</span>
+<span id="cb10-161"><a href="#cb10-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-162"><a href="#cb10-162" aria-hidden="true" tabindex="-1"></a>china_stats</span>
+<span id="cb10-163"><a href="#cb10-163" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-164"><a href="#cb10-164" aria-hidden="true" tabindex="-1"></a>China’s descriptive statistics highlight a wide range in economic performance from 1990 to 2023. GDP per capita shows substantial variation—from just under $1,000 to over $12,000—reflecting China’s rapid economic expansion during this period. The mean employment rate is roughly 69%, with values ranging from 62.5% to 76.8%, indicating steady but gradually improving labor-market conditions. GDP growth is the most volatile indicator, with rates spanning from 2.34% to 14.30%, and an average of 8.84%, capturing China’s historically high growth during industrialization and periods of global economic slowdown. Overall, the statistics reveal China’s significant economic development, rising incomes, and relatively stable employment patterns, alongside consistently strong—but fluctuating—economic growth.</span>
+<span id="cb10-165"><a href="#cb10-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-166"><a href="#cb10-166" aria-hidden="true" tabindex="-1"></a><span class="fu">#### USA</span></span>
+<span id="cb10-167"><a href="#cb10-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-170"><a href="#cb10-170" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb10-171"><a href="#cb10-171" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter for USA only</span></span>
+<span id="cb10-172"><a href="#cb10-172" aria-hidden="true" tabindex="-1"></a>usa_df <span class="op">=</span> df[df[<span class="st">"Country Code"</span>] <span class="op">==</span> <span class="st">"USA"</span>]</span>
+<span id="cb10-173"><a href="#cb10-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-174"><a href="#cb10-174" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute descriptive stats</span></span>
+<span id="cb10-175"><a href="#cb10-175" aria-hidden="true" tabindex="-1"></a>usa_stats <span class="op">=</span> usa_df[[<span class="st">"gdp_per_capita"</span>, <span class="st">"employment_rate"</span>, <span class="st">"gdp_growth"</span>]].describe()</span>
+<span id="cb10-176"><a href="#cb10-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-177"><a href="#cb10-177" aria-hidden="true" tabindex="-1"></a>usa_stats</span>
+<span id="cb10-178"><a href="#cb10-178" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-179"><a href="#cb10-179" aria-hidden="true" tabindex="-1"></a>The United States displays consistently high income levels over the 1990–2023 period, with GDP per capita ranging from about $38,600 to $65,500 and an average of $51,454, reflecting a stable, mature high-income economy. Employment rates show relatively low volatility, fluctuating between 56.6% and 63.5%, with a mean of 60.5%, indicating steady labor-market participation despite business cycle fluctuations such as the 2008 financial crisis and the COVID-19 recession. GDP growth varies more modestly than China’s, from –2.58% to 6.06%, averaging 2.49%, consistent with long-run U.S. economic trends of slower but stable growth. Overall, the U.S. statistics highlight a high-income economy with stable employment patterns and moderate economic growth volatility.</span>
+<span id="cb10-180"><a href="#cb10-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-181"><a href="#cb10-181" aria-hidden="true" tabindex="-1"></a><span class="fu"># Data Analysis</span></span>
+<span id="cb10-184"><a href="#cb10-184" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb10-185"><a href="#cb10-185" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup-analysis</span></span>
+<span id="cb10-186"><a href="#cb10-186" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb10-187"><a href="#cb10-187" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb10-188"><a href="#cb10-188" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb10-189"><a href="#cb10-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-190"><a href="#cb10-190" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb10-191"><a href="#cb10-191" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb10-192"><a href="#cb10-192" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb10-193"><a href="#cb10-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-194"><a href="#cb10-194" aria-hidden="true" tabindex="-1"></a><span class="co"># load merged data (path is from report/ folder)</span></span>
+<span id="cb10-195"><a href="#cb10-195" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"../data/processed/merged_data.csv"</span>)</span>
+<span id="cb10-196"><a href="#cb10-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-197"><a href="#cb10-197" aria-hidden="true" tabindex="-1"></a><span class="co"># clean / standardize</span></span>
+<span id="cb10-198"><a href="#cb10-198" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.rename(columns<span class="op">=</span>{<span class="st">"Country Code"</span>: <span class="st">"iso3"</span>, <span class="st">"Year"</span>: <span class="st">"year"</span>})</span>
+<span id="cb10-199"><a href="#cb10-199" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"year"</span>] <span class="op">=</span> df[<span class="st">"year"</span>].astype(<span class="bu">int</span>)</span>
+<span id="cb10-200"><a href="#cb10-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-201"><a href="#cb10-201" aria-hidden="true" tabindex="-1"></a>sns.<span class="bu">set</span>(style<span class="op">=</span><span class="st">"whitegrid"</span>)</span>
+<span id="cb10-202"><a href="#cb10-202" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-203"><a href="#cb10-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-204"><a href="#cb10-204" aria-hidden="true" tabindex="-1"></a><span class="fu">## GDP per capita over time </span></span>
+<span id="cb10-205"><a href="#cb10-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-208"><a href="#cb10-208" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb10-209"><a href="#cb10-209" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-gdp-percap</span></span>
+<span id="cb10-210"><a href="#cb10-210" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "GDP per capita (constant 2015 US$) for China (CHN) and the United States (USA), 1990–2023."</span></span>
+<span id="cb10-211"><a href="#cb10-211" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 8</span></span>
+<span id="cb10-212"><a href="#cb10-212" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 4</span></span>
+<span id="cb10-213"><a href="#cb10-213" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb10-214"><a href="#cb10-214" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb10-215"><a href="#cb10-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-216"><a href="#cb10-216" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">4</span>))</span>
+<span id="cb10-217"><a href="#cb10-217" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> c <span class="kw">in</span> df[<span class="st">"iso3"</span>].unique():</span>
+<span id="cb10-218"><a href="#cb10-218" aria-hidden="true" tabindex="-1"></a>    s <span class="op">=</span> df[df[<span class="st">"iso3"</span>] <span class="op">==</span> c]</span>
+<span id="cb10-219"><a href="#cb10-219" aria-hidden="true" tabindex="-1"></a>    plt.plot(s[<span class="st">"year"</span>], s[<span class="st">"gdp_per_capita"</span>], marker<span class="op">=</span><span class="st">"o"</span>, label<span class="op">=</span>c)</span>
+<span id="cb10-220"><a href="#cb10-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-221"><a href="#cb10-221" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"GDP per capita (constant 2015 US$)"</span>)</span>
+<span id="cb10-222"><a href="#cb10-222" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Year"</span>)</span>
+<span id="cb10-223"><a href="#cb10-223" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"GDP per capita"</span>)</span>
+<span id="cb10-224"><a href="#cb10-224" aria-hidden="true" tabindex="-1"></a>plt.legend(title<span class="op">=</span><span class="st">"Country"</span>)</span>
+<span id="cb10-225"><a href="#cb10-225" aria-hidden="true" tabindex="-1"></a>plt.grid(alpha<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb10-226"><a href="#cb10-226" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb10-227"><a href="#cb10-227" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-228"><a href="#cb10-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-229"><a href="#cb10-229" aria-hidden="true" tabindex="-1"></a>This chart compares the long-run evolution of GDP per capita in China (CHN) and the United States (USA) from 1990 to 2023. The United States starts the period at a much higher income level—around $39,000—consistent with its status as a mature, high-income economy. Growth is steady but moderate, rising to roughly $65,000 by 2023.</span>
+<span id="cb10-230"><a href="#cb10-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-231"><a href="#cb10-231" aria-hidden="true" tabindex="-1"></a>China, by contrast, begins at extremely low income levels (under $1,000) but shows rapid, sustained growth, especially after the early 2000s. By 2023, China surpasses $10,000 per capita. Although still far below the U.S., the rate of improvement is dramatic, reflecting China’s large-scale industrialization and economic reforms.</span>
+<span id="cb10-232"><a href="#cb10-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-233"><a href="#cb10-233" aria-hidden="true" tabindex="-1"></a>Overall, the figure illustrates a persistent income gap between the two countries, but also highlights China’s exceptional catch-up growth trajectory, which is far faster than the U.S. in relative terms.</span>
+<span id="cb10-234"><a href="#cb10-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-235"><a href="#cb10-235" aria-hidden="true" tabindex="-1"></a><span class="fu">## Employment-to-Population Ratio Over Time</span></span>
+<span id="cb10-236"><a href="#cb10-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-239"><a href="#cb10-239" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb10-240"><a href="#cb10-240" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-employment-rate</span></span>
+<span id="cb10-241"><a href="#cb10-241" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Employment-to-population ratio (ages 15+, %) for China and the United States, 1990–2023."</span></span>
+<span id="cb10-242"><a href="#cb10-242" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 8</span></span>
+<span id="cb10-243"><a href="#cb10-243" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 4</span></span>
+<span id="cb10-244"><a href="#cb10-244" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb10-245"><a href="#cb10-245" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb10-246"><a href="#cb10-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-247"><a href="#cb10-247" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">4</span>))</span>
+<span id="cb10-248"><a href="#cb10-248" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> c <span class="kw">in</span> df[<span class="st">"iso3"</span>].unique():</span>
+<span id="cb10-249"><a href="#cb10-249" aria-hidden="true" tabindex="-1"></a>    s <span class="op">=</span> df[df[<span class="st">"iso3"</span>] <span class="op">==</span> c]</span>
+<span id="cb10-250"><a href="#cb10-250" aria-hidden="true" tabindex="-1"></a>    plt.plot(s[<span class="st">"year"</span>], s[<span class="st">"employment_rate"</span>], marker<span class="op">=</span><span class="st">"o"</span>, label<span class="op">=</span>c)</span>
+<span id="cb10-251"><a href="#cb10-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-252"><a href="#cb10-252" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Employment-to-population ratio (15+, %)"</span>)</span>
+<span id="cb10-253"><a href="#cb10-253" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Year"</span>)</span>
+<span id="cb10-254"><a href="#cb10-254" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Employment rate (%)"</span>)</span>
+<span id="cb10-255"><a href="#cb10-255" aria-hidden="true" tabindex="-1"></a>plt.legend(title<span class="op">=</span><span class="st">"Country"</span>)</span>
+<span id="cb10-256"><a href="#cb10-256" aria-hidden="true" tabindex="-1"></a>plt.grid(alpha<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb10-257"><a href="#cb10-257" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb10-258"><a href="#cb10-258" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-259"><a href="#cb10-259" aria-hidden="true" tabindex="-1"></a>The employment-to-population ratio has followed very different trajectories in China and the United States from 1990 to 2023. China begins the period with an exceptionally high employment rate—around 77%—but experiences a steady long-term decline, falling to roughly 63% by 2023 as the country undergoes demographic aging, structural economic shifts, and expanded education enrollment. In contrast, the United States starts much lower, near 61%, and shows moderate cyclical movement rather than a clear long-term trend. U.S. employment rises through the late 1990s, dips sharply during the 2008 financial crisis, recovers gradually, and then experiences another dramatic drop during the COVID-19 pandemic before partially rebounding. Overall, China maintains higher employment participation throughout the entire period, while the U.S. exhibits greater sensitivity to economic shocks and business-cycle fluctuations.</span>
+<span id="cb10-260"><a href="#cb10-260" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-261"><a href="#cb10-261" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-262"><a href="#cb10-262" aria-hidden="true" tabindex="-1"></a><span class="fu">## GDP Growth Over Time</span></span>
+<span id="cb10-263"><a href="#cb10-263" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-266"><a href="#cb10-266" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb10-267"><a href="#cb10-267" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-gdp-growth-timeseries</span></span>
+<span id="cb10-268"><a href="#cb10-268" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Annual real GDP growth (%) in China and the United States, 1990–2023."</span></span>
+<span id="cb10-269"><a href="#cb10-269" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 8</span></span>
+<span id="cb10-270"><a href="#cb10-270" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 4</span></span>
+<span id="cb10-271"><a href="#cb10-271" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb10-272"><a href="#cb10-272" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb10-273"><a href="#cb10-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-274"><a href="#cb10-274" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">4</span>))</span>
+<span id="cb10-275"><a href="#cb10-275" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> c <span class="kw">in</span> df[<span class="st">"iso3"</span>].unique():</span>
+<span id="cb10-276"><a href="#cb10-276" aria-hidden="true" tabindex="-1"></a>    s <span class="op">=</span> df[df[<span class="st">"iso3"</span>] <span class="op">==</span> c]</span>
+<span id="cb10-277"><a href="#cb10-277" aria-hidden="true" tabindex="-1"></a>    plt.plot(s[<span class="st">"year"</span>], s[<span class="st">"gdp_growth"</span>], marker<span class="op">=</span><span class="st">"o"</span>, label<span class="op">=</span>c)</span>
+<span id="cb10-278"><a href="#cb10-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-279"><a href="#cb10-279" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"GDP growth (annual %)"</span>)</span>
+<span id="cb10-280"><a href="#cb10-280" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Year"</span>)</span>
+<span id="cb10-281"><a href="#cb10-281" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"GDP growth (%)"</span>)</span>
+<span id="cb10-282"><a href="#cb10-282" aria-hidden="true" tabindex="-1"></a>plt.axhline(<span class="dv">0</span>, linewidth<span class="op">=</span><span class="fl">0.6</span>)</span>
+<span id="cb10-283"><a href="#cb10-283" aria-hidden="true" tabindex="-1"></a>plt.legend(title<span class="op">=</span><span class="st">"Country"</span>)</span>
+<span id="cb10-284"><a href="#cb10-284" aria-hidden="true" tabindex="-1"></a>plt.grid(alpha<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb10-285"><a href="#cb10-285" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb10-286"><a href="#cb10-286" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-287"><a href="#cb10-287" aria-hidden="true" tabindex="-1"></a>The GDP growth trajectories of China and the United States from 1990 to 2023 reveal sharp contrasts in both level and volatility. China begins the period with exceptionally rapid expansion—often exceeding 10% throughout the 1990s and mid-2000s—reflecting its industrialization, export-led boom, and structural reforms. Growth gradually tapers as China transitions toward a more mature, consumption-driven economy, but it remains consistently higher than that of the United States, even during periods of global downturn. The United States, by comparison, exhibits much lower and more stable growth, generally fluctuating between 1% and 4%, with two major negative shocks: the 2009 recession during the global financial crisis and the steep contraction in 2020 due to the COVID-19 pandemic. Despite these shocks, U.S. growth rebounds quickly afterward. Overall, the figure highlights China’s long-run deceleration from extremely high growth rates and the United States’ cyclical but comparatively modest economic fluctuations.</span>
+<span id="cb10-288"><a href="#cb10-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-289"><a href="#cb10-289" aria-hidden="true" tabindex="-1"></a><span class="fu">## GDP per Capita vs Employment Rate</span></span>
+<span id="cb10-290"><a href="#cb10-290" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-293"><a href="#cb10-293" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb10-294"><a href="#cb10-294" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-gdp-vs-employment</span></span>
+<span id="cb10-295"><a href="#cb10-295" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Scatterplot of GDP per capita vs. employment rate (1990–2023) for China and the United States."</span></span>
+<span id="cb10-296"><a href="#cb10-296" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 6</span></span>
+<span id="cb10-297"><a href="#cb10-297" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 5</span></span>
+<span id="cb10-298"><a href="#cb10-298" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb10-299"><a href="#cb10-299" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb10-300"><a href="#cb10-300" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-301"><a href="#cb10-301" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>,<span class="dv">5</span>))</span>
+<span id="cb10-302"><a href="#cb10-302" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> c <span class="kw">in</span> df[<span class="st">"iso3"</span>].unique():</span>
+<span id="cb10-303"><a href="#cb10-303" aria-hidden="true" tabindex="-1"></a>    s <span class="op">=</span> df[df[<span class="st">"iso3"</span>] <span class="op">==</span> c]</span>
+<span id="cb10-304"><a href="#cb10-304" aria-hidden="true" tabindex="-1"></a>    plt.scatter(</span>
+<span id="cb10-305"><a href="#cb10-305" aria-hidden="true" tabindex="-1"></a>        s[<span class="st">"employment_rate"</span>],</span>
+<span id="cb10-306"><a href="#cb10-306" aria-hidden="true" tabindex="-1"></a>        s[<span class="st">"gdp_per_capita"</span>],</span>
+<span id="cb10-307"><a href="#cb10-307" aria-hidden="true" tabindex="-1"></a>        label<span class="op">=</span>c,</span>
+<span id="cb10-308"><a href="#cb10-308" aria-hidden="true" tabindex="-1"></a>        alpha<span class="op">=</span><span class="fl">0.8</span>,</span>
+<span id="cb10-309"><a href="#cb10-309" aria-hidden="true" tabindex="-1"></a>        s<span class="op">=</span><span class="dv">40</span>,</span>
+<span id="cb10-310"><a href="#cb10-310" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb10-311"><a href="#cb10-311" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-312"><a href="#cb10-312" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Employment rate (%)"</span>)</span>
+<span id="cb10-313"><a href="#cb10-313" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"GDP per capita"</span>)</span>
+<span id="cb10-314"><a href="#cb10-314" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"GDP per capita vs Employment rate"</span>)</span>
+<span id="cb10-315"><a href="#cb10-315" aria-hidden="true" tabindex="-1"></a>plt.legend(title<span class="op">=</span><span class="st">"Country"</span>)</span>
+<span id="cb10-316"><a href="#cb10-316" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb10-317"><a href="#cb10-317" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-318"><a href="#cb10-318" aria-hidden="true" tabindex="-1"></a>The scatterplot of GDP per capita versus employment rate highlights the fundamentally different economic structures of China and the United States. For China, lower employment rates (around 62–77%) correspond to significantly lower GDP per capita levels, forming a downward-sloping pattern: as China’s employment rate gradually declined over time, GDP per capita steadily increased from low levels. In contrast, the U.S. points cluster at much higher GDP per capita values ($40,000–$65,000) despite having lower and narrower employment rates (roughly 57–63%). The lack of overlap between the two countries shows that employment rate alone does not explain income differences; instead, structural productivity differences dominate. Overall, the figure illustrates that China’s rapid income growth occurred even as employment participation fell, while the U.S. maintains high GDP per capita despite relatively modest employment rates.</span>
+<span id="cb10-319"><a href="#cb10-319" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-320"><a href="#cb10-320" aria-hidden="true" tabindex="-1"></a><span class="fu">## Distribution of GDP Growth by Country</span></span>
+<span id="cb10-321"><a href="#cb10-321" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-324"><a href="#cb10-324" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb10-325"><a href="#cb10-325" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-gdp-growth-box</span></span>
+<span id="cb10-326"><a href="#cb10-326" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Boxplot of annual GDP growth rates by country, 1990–2023."</span></span>
+<span id="cb10-327"><a href="#cb10-327" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 6</span></span>
+<span id="cb10-328"><a href="#cb10-328" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 5</span></span>
+<span id="cb10-329"><a href="#cb10-329" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb10-330"><a href="#cb10-330" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb10-331"><a href="#cb10-331" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-332"><a href="#cb10-332" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>,<span class="dv">5</span>))</span>
+<span id="cb10-333"><a href="#cb10-333" aria-hidden="true" tabindex="-1"></a>sns.boxplot(data<span class="op">=</span>df, x<span class="op">=</span><span class="st">"iso3"</span>, y<span class="op">=</span><span class="st">"gdp_growth"</span>)</span>
+<span id="cb10-334"><a href="#cb10-334" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"GDP Growth Distribution by Country"</span>)</span>
+<span id="cb10-335"><a href="#cb10-335" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Country"</span>)</span>
+<span id="cb10-336"><a href="#cb10-336" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"GDP growth (annual %)"</span>)</span>
+<span id="cb10-337"><a href="#cb10-337" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb10-338"><a href="#cb10-338" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-339"><a href="#cb10-339" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-340"><a href="#cb10-340" aria-hidden="true" tabindex="-1"></a>The boxplot highlights the stark contrast in GDP growth volatility and levels between China and the United States from 1990 to 2023. China’s distribution is centered much higher, with a median close to 9% annual growth and an interquartile range that remains well above U.S. levels. The upper whisker reaches above 14%, reflecting periods of extremely rapid expansion during the early 2000s. China also shows wider dispersion, indicating greater year-to-year variability in growth. In contrast, the United States exhibits a much lower and more stable growth distribution, with a median around 2–3% and narrower spread. The U.S. distribution includes occasional negative growth years (notably during recessions such as 2008 and 2020), but overall remains tightly clustered. This comparison underscores that China’s economic trajectory has been characterized by high-speed but more volatile growth, while the U.S. follows a more moderate and consistent pattern.</span>
+<span id="cb10-341"><a href="#cb10-341" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-342"><a href="#cb10-342" aria-hidden="true" tabindex="-1"></a><span class="fu">## Alternative View: GDP Growth Over Time (Seaborn)</span></span>
+<span id="cb10-343"><a href="#cb10-343" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-346"><a href="#cb10-346" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb10-347"><a href="#cb10-347" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-gdp-growth-seaborn</span></span>
+<span id="cb10-348"><a href="#cb10-348" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Seaborn line plot of annual GDP growth, highlighting cross-country differences in volatility and timing of shocks."</span></span>
+<span id="cb10-349"><a href="#cb10-349" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 8</span></span>
+<span id="cb10-350"><a href="#cb10-350" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 4</span></span>
+<span id="cb10-351"><a href="#cb10-351" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb10-352"><a href="#cb10-352" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb10-353"><a href="#cb10-353" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-354"><a href="#cb10-354" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">4</span>))</span>
+<span id="cb10-355"><a href="#cb10-355" aria-hidden="true" tabindex="-1"></a>sns.lineplot(data<span class="op">=</span>df, x<span class="op">=</span><span class="st">"year"</span>, y<span class="op">=</span><span class="st">"gdp_growth"</span>, hue<span class="op">=</span><span class="st">"iso3"</span>, marker<span class="op">=</span><span class="st">"o"</span>)</span>
+<span id="cb10-356"><a href="#cb10-356" aria-hidden="true" tabindex="-1"></a>plt.axhline(<span class="dv">0</span>, linewidth<span class="op">=</span><span class="fl">0.7</span>)</span>
+<span id="cb10-357"><a href="#cb10-357" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"GDP Growth Over Time"</span>)</span>
+<span id="cb10-358"><a href="#cb10-358" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Year"</span>)</span>
+<span id="cb10-359"><a href="#cb10-359" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"GDP growth (annual %)"</span>)</span>
+<span id="cb10-360"><a href="#cb10-360" aria-hidden="true" tabindex="-1"></a>plt.legend(title<span class="op">=</span><span class="st">"Country"</span>)</span>
+<span id="cb10-361"><a href="#cb10-361" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb10-362"><a href="#cb10-362" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-363"><a href="#cb10-363" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-364"><a href="#cb10-364" aria-hidden="true" tabindex="-1"></a>The Seaborn line plot provides a smooth comparative view of annual GDP growth for China and the United States from 1990 to 2023, emphasizing differences in volatility and the timing of major economic shocks. China’s growth trajectory is visibly high and variable, especially during the 1990s and early 2000s, when annual growth frequently exceeded 10%. Over time, however, China shows a gradual deceleration, moving from double-digit growth toward more moderate 5–7% levels. In contrast, U.S. GDP growth remains much lower and more stable throughout the entire period, generally fluctuating between 1% and 4%. The plot also highlights synchronized downturns — most notably the 2008 global financial crisis and the sharp contractions in 2020 — where both countries experience abrupt dips, though the U.S. downturns are typically more severe. Overall, the graph underscores the structural differences between a rapidly industrializing economy (China) and a mature, service-driven economy (the U.S.), reflected in their distinct growth patterns and sensitivity to global shocks.</span>
+<span id="cb10-365"><a href="#cb10-365" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-366"><a href="#cb10-366" aria-hidden="true" tabindex="-1"></a><span class="fu"># Results &amp; Discussion</span></span>
+<span id="cb10-367"><a href="#cb10-367" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-368"><a href="#cb10-368" aria-hidden="true" tabindex="-1"></a><span class="fu">##  Main Patterns in the Data</span></span>
+<span id="cb10-369"><a href="#cb10-369" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-370"><a href="#cb10-370" aria-hidden="true" tabindex="-1"></a>Across all indicators, China and the United States follow very different paths from 1990–2023. The U.S. looks like a stable high-income economy, while China behaves like a rapidly transforming, catching-up economy.</span>
+<span id="cb10-371"><a href="#cb10-371" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-372"><a href="#cb10-372" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**GDP per capita:**  </span>
+<span id="cb10-373"><a href="#cb10-373" aria-hidden="true" tabindex="-1"></a>  The U.S. stays high and rises steadily (about \$38k → \$60k+). China starts below \$1k but climbs above \$10k. The income gap remains large, yet the trend clearly shows long-run convergence.</span>
+<span id="cb10-374"><a href="#cb10-374" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-375"><a href="#cb10-375" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Employment-to-population ratio:**  </span>
+<span id="cb10-376"><a href="#cb10-376" aria-hidden="true" tabindex="-1"></a>  China’s employment rate falls from roughly 77% to the low-60s, consistent with aging, longer schooling, and a shift away from low-productivity work. U.S. employment fluctuates around the low-60% range, with dips during the early-2000s slowdown, the 2008 crisis, and the 2020 pandemic.</span>
+<span id="cb10-377"><a href="#cb10-377" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-378"><a href="#cb10-378" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**GDP growth:**  </span>
+<span id="cb10-379"><a href="#cb10-379" aria-hidden="true" tabindex="-1"></a>  China records very high and volatile growth in the 1990s–2000s and then gradually slows after 2010. U.S. growth is lower (around 1–3%) but more stable, with sharp drops only in 2008 and 2020. Both countries are hit by global shocks, but China’s contractions are smaller and its recoveries faster.</span>
+<span id="cb10-380"><a href="#cb10-380" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-381"><a href="#cb10-381" aria-hidden="true" tabindex="-1"></a><span class="fu">##  Relationships Between Indicators</span></span>
+<span id="cb10-382"><a href="#cb10-382" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-383"><a href="#cb10-383" aria-hidden="true" tabindex="-1"></a>The scatterplot of **GDP per capita vs. employment** shows two distinct patterns:</span>
+<span id="cb10-384"><a href="#cb10-384" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-385"><a href="#cb10-385" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>For **China**, higher GDP per capita coincides with *lower* employment rates, suggesting that growth is mainly driven by rising productivity rather than by adding more workers.</span>
+<span id="cb10-386"><a href="#cb10-386" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>For the **United States**, GDP per capita is slightly higher when employment is higher, consistent with a demand- and labor-driven economy where participation supports income and consumption.</span>
+<span id="cb10-387"><a href="#cb10-387" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-388"><a href="#cb10-388" aria-hidden="true" tabindex="-1"></a>The **growth boxplots and time-series** reinforce this contrast: China has higher average growth and much more dispersion, while U.S. growth is tightly clustered around 2–3%. This mirrors an economy still undergoing structural change (China) versus a mature, service-based economy (U.S.).</span>
+<span id="cb10-389"><a href="#cb10-389" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-390"><a href="#cb10-390" aria-hidden="true" tabindex="-1"></a><span class="fu">##  Interpretation</span></span>
+<span id="cb10-391"><a href="#cb10-391" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-392"><a href="#cb10-392" aria-hidden="true" tabindex="-1"></a>Putting these pieces together:</span>
+<span id="cb10-393"><a href="#cb10-393" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-394"><a href="#cb10-394" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>China is clearly **catching up** in income and economic scale, but still far from U.S. living standards.</span>
+<span id="cb10-395"><a href="#cb10-395" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The United States maintains **stable prosperity**, with smaller swings in growth and employment.</span>
+<span id="cb10-396"><a href="#cb10-396" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Differences in employment trends, growth volatility, and crisis responses reflect contrasting demographics, institutions, and policy frameworks.</span>
+<span id="cb10-397"><a href="#cb10-397" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-398"><a href="#cb10-398" aria-hidden="true" tabindex="-1"></a><span class="fu"># Conclusion</span></span>
+<span id="cb10-399"><a href="#cb10-399" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-400"><a href="#cb10-400" aria-hidden="true" tabindex="-1"></a>This project shows that China and the United States have moved along very different development paths over the past three decades. China combined falling employment ratios with rapid gains in GDP per capita and historically high growth rates, consistent with a shift toward higher productivity and structural upgrading. The United States, in contrast, exhibits moderate but steady growth, relatively stable employment, and sharper downturns only during major global crises. Overall, the evidence points to ongoing but incomplete income convergence: China is catching up, while the U.S. remains a high-income benchmark. These results highlight how long-run comparative data can clarify both the sources of growth and the vulnerabilities of the world’s two largest economies.</span>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+
+<script src="report_files/libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
